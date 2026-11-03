@@ -4,6 +4,8 @@
 
 Give a robotic hand a target posture and let its artificial brain respond to touch. Position comparisons support movement toward the target, while fingertip feedback opposes further closing. The behavior comes from connected neural primitives interacting with a physical body, without a training dataset or pre-training step.
 
+**GET YOUR SYNTHETIC NEURONS:** [Prima-Lux Dev Kit with up to 10,000 synthetic neurons](https://artificialbrains.ai)
+
 Clone the example, run it on your Prima-Lux, and use it as a starting point for your own projects. You can explore the brain on the Canvas, observe individual neurons, change the circuit, and share what you build.
 
 The project includes the brain design, a browser control panel, five-channel sensor firmware, telemetry recording, and a [hands-on guide to the neural circuit](docs/neural-grip.md).
@@ -194,12 +196,6 @@ AB_TELEMETRY=true python run.py \
 
 This mode skips physical opening and automatic zeroing. On a fresh setup, leave the pads unloaded and select **Zero unloaded sensors** in the UI. You can then press each pad and follow its neural response. `--cli` selects terminal controls; `--no-browser` prints the UI address without opening it.
 
-
-## Demo video
-
-[Watch the tactile-grip demo](media/hand-demo.mp4)
-
-> **DO NOT TRY THIS UNLESS YOU HAVE CONDUCTED THOROUGH TESTING.** Human-contact demonstrations require careful validation of your complete hardware, sensor, neural, and actuator setup before use.
 
 ## How the brain adjusts the grip
 
