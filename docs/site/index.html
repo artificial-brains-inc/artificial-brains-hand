@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artificial Brains Tactile Hand · Artificial Brains</title><link rel="stylesheet" href="style.css"></head>
+<body><header><strong>Artificial Brains · Tactile Hand</strong><nav aria-label="Documentation">
+<a href="index.html">Get started</a><a href="neural-grip.html">Neural grip</a><a href="configuration.html">Configuration</a><a href="sensors.html">Sensors</a><a href="testing.html">Testing</a>
+</nav></header><main><h1 id="artificial-brains-tactile-hand">Artificial Brains Tactile Hand</h1>
+<p><strong>Explore biomimetic grip control with synthetic neurons.</strong></p>
+<p>Give a robotic hand a target posture and let its artificial brain respond to touch. Position comparisons support movement toward the target, while fingertip feedback opposes further closing. The behavior comes from connected neural primitives interacting with a physical body, without a training dataset or pre-training step.</p>
+<p>Clone the example, run it on your Prima-Lux, and use it as a starting point for your own projects. You can explore the brain on the Canvas, observe individual neurons, change the circuit, and share what you build.</p>
+<p>The project includes the brain design, a browser control panel, five-channel sensor firmware, telemetry recording, and a <a href="neural-grip.html">hands-on guide to the neural circuit</a>.</p>
+<p><a href="../assets/ui-preview.png">View the control panel</a> · <a href="neural-grip.html">Learn how the grip works</a></p>
+<h2 id="what-you-need">What you need</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Setup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prima-Lux dev kit</strong></td>
+<td>A registered 10,000-neuron device, its developer API key, and device software supporting the SDK 0.4.0 live output stream.</td>
+</tr>
+<tr>
+<td><strong>Aero Hand Open</strong></td>
+<td>A powered, configured hand with vendor firmware and homing completed. Follow the <a href="https://docs.tetheria.ai/docs/sdk/">hand setup guide</a>.</td>
+</tr>
+<tr>
+<td><strong>Five touch sensors</strong></td>
+<td>One pad per finger, connected to a USB acquisition board. The included firmware supports a Blue Pill STM32F103C8 using PA0–PA4. See <a href="sensors.html">sensor setup</a> for wiring requirements and the data format.</td>
+</tr>
+<tr>
+<td><strong>Computer</strong></td>
+<td>Linux/Ubuntu, Python 3.10 or newer, Git, Python venv support, and a browser.</td>
+</tr>
+<tr>
+<td><strong>Connections</strong></td>
+<td>Network access to Prima-Lux and separate data USB connections for the hand and sensor board. Internet access is needed to install dependencies and use the device build workflow.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The acquisition firmware works with analog contact readings. Choose sensors and conditioning circuitry suitable for your board's electrical limits; the project leaves the sensor model and circuit to your hardware setup. A board that already produces the <a href="sensors.html#data-format">supported CSV format</a> can be used directly.</p>
+<h2 id="1-clone-and-install">1. Clone and install</h2>
+<p>On Ubuntu, install the system prerequisites once:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install git python3 python3-venv
+</code></pre>
+<p>Clone from GitHub:</p>
+<pre><code class="language-bash">git clone https://github.com/artificial-brains-inc/artificial-brains-hand.git
+cd artificial-brains-hand
+</code></pre>
+<h3 id="from-a-downloaded-git-bundle">From a downloaded Git bundle</h3>
+<p>A Git bundle contains the same repository. To start from the downloaded bundle
+instead of GitHub, use this clone command in a directory for your projects:</p>
+<pre><code class="language-bash">git clone &quot;$HOME/Downloads/artificial-brains-hand-v0.0.0.bundle&quot; artificial-brains-hand
+cd artificial-brains-hand
+</code></pre>
+<p>Use either clone method, then install into a new environment in that checkout:</p>
+<pre><code class="language-bash">python3 -m venv .venv
+source .venv/bin/activate
+python -m ensurepip --upgrade
+python -m pip install -r requirements.txt
+python -m pip check
+
+cp .env.example .env
+python run.py --check
+</code></pre>
+<p><code>requirements.txt</code> installs the Artificial Brains SDK, Aero Hand SDK, and serial
+library. <code>--check</code> validates the design and installed SDK interfaces without
+connecting to hardware. All paths in this guide are relative to this checkout;
+no previous project or environment is needed.</p>
+<p>For a look at the controls before connecting your equipment:</p>
+<pre><code class="language-bash">python run.py --preview-ui
+</code></pre>
+<p>You can read the <a href="neural-grip.html">neural-grip guide</a> directly on GitHub.
+A browser-readable copy is included for local use, with the same guide and
+working navigation:</p>
+<pre><code class="language-bash">xdg-open docs/site/index.html
+</code></pre>
+<h2 id="2-configure-your-device">2. Configure your device</h2>
+<p>Open <code>.env</code> and enter the address and developer API key from your Prima-Lux Device Manager:</p>
+<pre><code class="language-dotenv">AB_DEVICE_URL=http://prima-lux.local:8080
+AB_DEVICE_API_KEY=YOUR_DEVICE_API_KEY
+AB_DEVICE_TIMEOUT=2
+AB_TELEMETRY=true
+</code></pre>
+<p>An IP address can replace <code>prima-lux.local</code>. Keep your API key in this local file; <code>.env</code> is ignored by Git. The <a href="https://github.com/artificial-brains-inc/artificial_brains">SDK repository</a> covers device registration and includes the public developer guidelines.</p>
+<h3 id="connect-the-hand-and-sensors">Connect the hand and sensors</h3>
+<p>List the available serial devices:</p>
+<pre><code class="language-bash">python -m serial.tools.list_ports -v
+ls -l /dev/serial/by-id/
+</code></pre>
+<p>Identify the <strong>hand</strong> and the <strong>separate sensor board</strong>, then set their paths in your terminal. These are example port assignments; use the paths reported on your computer:</p>
+<pre><code class="language-bash">export HAND_PORT=&quot;/dev/ttyACM1&quot;
+export TACTILE_PORT=&quot;/dev/ttyACM0&quot;
+</code></pre>
+<p>A <code>/dev/serial/by-id/...</code> path is useful for keeping the same device selection after reconnecting USB. Close other applications using either port, then check the readings:</p>
+<pre><code class="language-bash">python run.py --read-positions --port &quot;$HAND_PORT&quot;
+python run.py --read-tactile --tactile-port &quot;$TACTILE_PORT&quot;
+</code></pre>
+<p>The first command prints seven actuator positions; the second prints five raw touch readings. Neither moves the hand or starts the brain. The finger order is <strong>thumb, index, middle, ring, little</strong>.</p>
+<p>For a uniquely identified STM32/Maple sensor board, you can also use <code>--tactile-port auto</code>. The hand can be selected with <code>--serial-number YOUR_HAND_USB_SERIAL</code> instead of <code>--port</code>. See <a href="configuration.html">configuration</a> for these options and <a href="troubleshooting.html">troubleshooting</a> for serial permissions.</p>
+<h3 id="match-the-configuration-to-your-hand">Match the configuration to your hand</h3>
+<p>The supplied settings are in <code>config.json</code>. To keep your own settings separate:</p>
+<pre><code class="language-bash">cp config.json config.local.json
+</code></pre>
+<p>The application automatically uses <code>config.local.json</code> when it exists. Check these two mappings:</p>
+<ul>
+<li><strong><code>motor_directions</code></strong> follows the seven-motor order documented in <a href="configuration.html">configuration</a>. The supplied <code>[-1, 1, 1, 1, 1, 1, 1]</code> uses a reversed logical convention for thumb abduction.</li>
+<li><strong><code>tactile_directions</code></strong> follows thumb-to-little order. Use <code>1</code> when a pad's reading increases under contact, or <code>-1</code> when it decreases.</li>
+</ul>
+<p>Thumb abduction has its own setup control in the UI and stays fixed during the grasp. The other six motors receive neural movement commands.</p>
+<h2 id="3-explore-and-build-the-brain">3. Explore and build the brain</h2>
+<p>Open the supplied design on the Canvas:</p>
+<pre><code class="language-bash">ab design --brain brain.abdesign.json
+</code></pre>
+<p>Follow one finger's desired-position, measured-position, motor, and touch pathways. Then build the design on Prima-Lux:</p>
+<pre><code class="language-bash">ab build brain --brain brain.abdesign.json --env .env
+</code></pre>
+<p>Wait for <strong>READY</strong> before running. Build again whenever you change the neural design or switch brains on the device. Run one controller per Prima-Lux at a time.</p>
+<h2 id="4-run-the-hand">4. Run the hand</h2>
+<p>Keep the hand empty and the sensor pads clear during startup. The application opens the six active motors, captures the unloaded sensor readings, and then starts the brain. Begin with bench objects and keep your hands clear of moving parts; <a href="safety.html">bench setup</a> covers operating precautions.</p>
+<pre><code class="language-bash">AB_TELEMETRY=true python run.py \
+  --port &quot;$HAND_PORT&quot; \
+  --tactile-port &quot;$TACTILE_PORT&quot; \
+  --env .env \
+  --gain 4
+</code></pre>
+<p>The browser control panel opens automatically. <code>run.py</code> starts the neural session, so there is no separate <code>ab run</code> step.</p>
+<p>On first launch, thumb abduction stays at its measured position. While the panel shows <strong>Hold</strong>, use <strong>Thumb position</strong> to place it for your grasp, then select <strong>Apply &amp; save</strong> or <strong>Lock measured position</strong>. That setting is reused on subsequent runs.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Use it to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pose buttons</strong></td>
+<td>Select Open, Grab, Pinch, or another included gesture.</td>
+</tr>
+<tr>
+<td><strong>Posture amount</strong></td>
+<td>Set how far to move toward the next selected pose. This changes posture, not grip pressure.</td>
+</tr>
+<tr>
+<td><strong>Actuator coordinates</strong></td>
+<td>Enter a target for each motor; the locked thumb-abduction position is preserved.</td>
+</tr>
+<tr>
+<td><strong>Zero unloaded sensors</strong></td>
+<td>Refresh the unloaded baseline while the hand is empty and in Hold. Startup does this automatically.</td>
+</tr>
+<tr>
+<td><strong>Hold / Space</strong></td>
+<td>Hold the measured hand position while keeping the neural session available.</td>
+</tr>
+<tr>
+<td><strong>Stop brain</strong></td>
+<td>Hold the hand, stop the neural session, and save its dynamics.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The default gain is <code>4</code>. Gain scales the actuator increment produced by each neural output count; use a different <code>--gain</code> value when your hardware or experiment calls for it. The <a href="configuration.html">configuration guide</a> explains gains, saved thumb setup, and sensor polarity.</p>
+<p>To finish, select <strong>Stop brain</strong> or press Ctrl+C in the terminal. Wait for the Stop/save confirmation before disconnecting Prima-Lux. Closing the browser requests Hold but leaves the neural session running.</p>
+<h3 id="observe-without-applying-motor-commands">Observe without applying motor commands</h3>
+<p>Use the same inputs and real neural output stream with motor writes disabled:</p>
+<pre><code class="language-bash">AB_TELEMETRY=true python run.py \
+  --port &quot;$HAND_PORT&quot; \
+  --tactile-port &quot;$TACTILE_PORT&quot; \
+  --env .env \
+  --observe-only
+</code></pre>
+<p>This mode skips physical opening and automatic zeroing. On a fresh setup, leave the pads unloaded and select <strong>Zero unloaded sensors</strong> in the UI. You can then press each pad and follow its neural response. <code>--cli</code> selects terminal controls; <code>--no-browser</code> prints the UI address without opening it.</p>
+<h2 id="demo-video">Demo video</h2>
+<p><a href="../../media/hand-demo.mp4">Watch the tactile-grip demo</a></p>
+<blockquote>
+<p><strong>DO NOT TRY THIS UNLESS YOU HAVE CONDUCTED THOROUGH TESTING.</strong> Human-contact demonstrations require careful validation of your complete hardware, sensor, neural, and actuator setup before use.</p>
+</blockquote>
+<h2 id="how-the-brain-adjusts-the-grip">How the brain adjusts the grip</h2>
+<p>Each motor has two complete directional primitives: one for <strong>FLEX</strong> and one for <strong>EXTEND</strong>. Desired and measured positions enter separately and feed opposing <strong>Theta T2</strong> comparisons. Each comparison supports a motor chain:</p>
+<pre><code class="language-text">Position comparison → Theta T3 → Theta T2.01 → Beta T5 → motor output
+</code></pre>
+<p>Each touch sensor has a sensory pathway:</p>
+<pre><code class="language-text">Touch → Theta T3 → Theta T2.01 → Beta T5 opposition
+</code></pre>
+<p>The position comparison supports reaching the target. The tactile opposition inhibits that finger's closing pathway and its FLEX output. It also produces a <strong>grip-HOLD</strong> output, which tells the hand driver to cancel any closing travel still pending. Opening remains available.</p>
+<p>Local <strong>Beta T3 reset</strong> pathways clear the active motor and tactile states, including their bistable outputs. Continuing observations can recruit another response. The hand changes position and contact as it moves, and those new observations return to the brain. This ongoing interaction is the grip-regulation loop.</p>
+<p>The controller supplies observations, zeroes unloaded sensor offsets, and translates neural outputs into motor commands. <strong>The brain produces the position comparisons, tactile inhibition, and grip-HOLD signals.</strong> Mechanical travel limits and the manual thumb lock remain in the driver.</p>
+<p>There is no per-object pressure target to capture. Here, “enough grip” is the tactile response opposing further closure, rather than a force value prescribed by the application. Readings are relative contact measurements, not newtons.</p>
+<p>Follow the <a href="neural-grip.html">neural-grip walkthrough</a> to build these relationships, inspect their activity, and experiment with the operating points described in the public guidelines.</p>
+<h2 id="make-it-your-own">Make it your own</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Edit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A gesture or target posture</td>
+<td><code>poses.json</code></td>
+</tr>
+<tr>
+<td>Motor gains, sensor polarity, or transport settings</td>
+<td><code>config.local.json</code></td>
+</tr>
+<tr>
+<td>Neural populations, TNorms, connections, or inhibition</td>
+<td><code>aerohand_control/design.py</code></td>
+</tr>
+<tr>
+<td>Input encoding and output decoding</td>
+<td><code>aerohand_control/neural.py</code></td>
+</tr>
+<tr>
+<td>The control panel</td>
+<td><code>aerohand_control/web/</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>After editing the neural generator, regenerate the exports, inspect the circuit, and rebuild:</p>
+<pre><code class="language-bash">python make_brain.py
+python run.py --check
+ab design --brain brain.abdesign.json
+ab build brain --brain brain.abdesign.json --env .env
+</code></pre>
+<p>Wait for READY, then run the hand again. <code>brain_source.py</code> is the generated literal Python design; <code>design.py</code> is the editable generator. Follow the <a href="neural-grip.html#experiments-to-try">neural-grip experiments</a> to change one relationship at a time and observe the result.</p>
+<h2 id="telemetry-and-logs">Telemetry and logs</h2>
+<p>With <code>AB_TELEMETRY=true</code>, the SDK opens the neuron viewer alongside the controls. Inspect a population's firing history while selecting a pose or pressing a pad. <strong>Freeze pauses the viewer, not the hand or brain.</strong></p>
+<p>Every hardware run records data under <code>logs/run-&lt;timestamp&gt;-&lt;id&gt;/</code>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Recorded data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sensors.jsonl</code></td>
+<td>Touch readings, positions, targets, and published observations.</td>
+</tr>
+<tr>
+<td><code>outputs.jsonl</code></td>
+<td>Neural output frames.</td>
+</tr>
+<tr>
+<td><code>motion.jsonl</code></td>
+<td>Requested and applied movement, with per-motor limit reasons.</td>
+</tr>
+<tr>
+<td><code>neurons.jsonl</code></td>
+<td>Neuron layout and activity from the device telemetry stream.</td>
+</tr>
+<tr>
+<td><code>events.jsonl</code></td>
+<td>Commands, startup, zeroing, recoveries, and shutdown.</td>
+</tr>
+<tr>
+<td><code>run.json</code></td>
+<td>Run settings, graph identity, and recording status.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The default cap is 256 MiB per run. The UI reports stream availability and recording status. Use <code>--no-neuron-log</code> to keep the other logs without the full-neuron recording.</p>
+<p>After stopping, summarize or package a run:</p>
+<pre><code class="language-bash">python tools/summarize_logs.py
+python tools/pack_logs.py
+</code></pre>
+<p>Review logs for device identifiers and local paths before sharing. For a quiet finger, compare neural outputs with applied movement: <code>neural_grip_hold</code> identifies the tactile command, while <code>target_lead</code> identifies an adapter restriction. See <a href="troubleshooting.html">troubleshooting</a>.</p>
+<h2 id="learn-test-and-contribute">Learn, test, and contribute</h2>
+<p>Explore the <a href="https://github.com/artificial-brains-inc/artificial_brains">public guidelines and SDK</a>, the <a href="neural-grip.html">neural-grip guide</a>, <a href="configuration.html">configuration reference</a>, and <a href="sensors.html">sensor setup</a>.</p>
+<p>To run the software checks:</p>
+<pre><code class="language-bash">python -m pip install -r requirements-test.txt
+python -m pytest -q
+python tools/check_project.py
+</code></pre>
+<p><a href="testing.html">Testing</a> covers the checks and optional browser tests. Improvements, examples, and observations are welcome; see <a href="contributing.html">Contributing</a>.</p>
+<h2 id="license">License</h2>
+<p>You are free to clone, use, modify, and redistribute this example for projects using <strong>Artificial Brains products</strong>, including commercial projects, under the <a href="license.html">Artificial Brains Example Code License</a>.</p>
+<p>The SDKs, hardware, and vendor firmware retain their own licenses; this license covers the example, not those products. See <a href="third-party-notices.html">third-party notices</a> and <a href="branding.html">brand assets</a> for attribution and included materials.</p>
+</main><footer><a href="index.html">Getting started</a> · <a href="license.html">License</a></footer></body></html>

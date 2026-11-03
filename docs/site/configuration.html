@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Configuration reference · Artificial Brains</title><link rel="stylesheet" href="style.css"></head>
+<body><header><strong>Artificial Brains · Tactile Hand</strong><nav aria-label="Documentation">
+<a href="index.html">Get started</a><a href="neural-grip.html">Neural grip</a><a href="configuration.html">Configuration</a><a href="sensors.html">Sensors</a><a href="testing.html">Testing</a>
+</nav></header><main><h1 id="configuration-reference">Configuration reference</h1>
+<p>Run from the repository root. The application defaults to <code>config.local.json</code>
+when it exists, otherwise <code>config.json</code>. Use <code>--config PATH</code> to choose explicitly.
+<code>config.local.json</code>, <code>.env</code>, <code>thumb_setup.json</code>, <code>tactile_baseline.json</code> and logs
+are local operating data and are ignored by Git.</p>
+<h2 id="three-different-coordinate-representations">Three different coordinate representations</h2>
+<p><code>poses.json</code> stores <strong>compact joint degrees</strong> in this order:</p>
+<pre><code class="language-text">thumb_cmc_abd, thumb_cmc_flex, thumb_mcp_ip, index, middle, ring, pinky
+</code></pre>
+<p>The UI's coordinate fields and the brain's desired/measured inputs use
+<strong>logical actuator degrees</strong> in this order:</p>
+<pre><code class="language-text">thumb_cmc_abd, thumb_cmc_flex, thumb_tendon,
+index_tendon, middle_tendon, ring_tendon, pinky_tendon
+</code></pre>
+<p>These are not interchangeable representations. Vendor forward geometry maps the
+compact joint posture to motor targets, accounting for thumb coupling. Motor
+orientation is applied consistently before coupled conversion; feedback and
+serial writes use the corresponding inverse/reflection. Native <strong>hardware
+actuator degrees</strong> are the values actually sent to the serial interface.
+Measured actuator positions are not direct measurements of all finger joints.</p>
+<h2 id="host-configuration">Host configuration</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>motor_directions</code></td>
+<td><code>[-1,1,1,1,1,1,1]</code></td>
+<td>Coordinate orientation, seven entries in motor order. <code>-1</code> reflects that axis; verify against your setup.</td>
+</tr>
+<tr>
+<td><code>per_spike_degrees</code></td>
+<td><code>[0.35,0.5,0.75,0.8,0.8,0.8,0.8]</code></td>
+<td>Actuator-target increment per decoded output count, before global gain and limits. Not neural connection weights.</td>
+</tr>
+<tr>
+<td><code>input_hz</code></td>
+<td><code>20</code></td>
+<td>Upper acquisition setting. Actual capture is conservatively paced by recent output receipt throughput, at most 20 Hz. Not the neural iteration frequency.</td>
+</tr>
+<tr>
+<td><code>telemetry_timeout_s</code></td>
+<td><code>0.15</code></td>
+<td>Runtime hand-position read deadline. A missed reply can recover later.</td>
+</tr>
+<tr>
+<td><code>startup_timeout_s</code></td>
+<td><code>5</code></td>
+<td>First hand-position read deadline.</td>
+</tr>
+<tr>
+<td><code>output_timeout_s</code></td>
+<td><code>2</code></td>
+<td>Watchdog for missing neural output frames. Empty frames are valid frames.</td>
+</tr>
+<tr>
+<td><code>max_output_age_s</code></td>
+<td><code>0.5</code></td>
+<td>Maximum age of queued decoded output before the controller refuses to replay it.</td>
+</tr>
+<tr>
+<td><code>command_timeout_s</code></td>
+<td><code>null</code></td>
+<td>No automatic command duration by default. A positive value requests an operational Hold after that duration.</td>
+</tr>
+<tr>
+<td><code>status_interval_s</code></td>
+<td><code>1</code></td>
+<td>Terminal status interval.</td>
+</tr>
+<tr>
+<td><code>max_target_lead_degrees</code></td>
+<td><code>8</code></td>
+<td>Limits pending motor target lead relative to actual position, per motor. It is not a force threshold or neural decision.</td>
+</tr>
+<tr>
+<td><code>tactile_max_age_s</code></td>
+<td><code>0.25</code></td>
+<td>Maximum age of a current tactile sample. Missing data are not replaced by zero.</td>
+</tr>
+<tr>
+<td><code>tactile_directions</code></td>
+<td><code>[1,1,1,1,1]</code></td>
+<td>Sensor polarity in thumb-to-little order. <code>1</code> means ADC increases under contact; <code>-1</code> means it decreases.</td>
+</tr>
+<tr>
+<td><code>feedback_reuse_s</code></td>
+<td><code>0.04</code></td>
+<td>Maximum time a measured hand-position packet may be reused for nearby output events.</td>
+</tr>
+<tr>
+<td><code>logging_max_mb</code></td>
+<td><code>256</code></td>
+<td>Per-run log cap in MiB; status reports drops/full disk errors.</td>
+</tr>
+<tr>
+<td><code>startup_open_timeout_s</code></td>
+<td><code>30</code></td>
+<td>Deadline for the other six motors to reach the configured Open pose.</td>
+</tr>
+<tr>
+<td><code>startup_open_tolerance_degrees</code></td>
+<td><code>2</code></td>
+<td>Per-motor arrival tolerance for startup; manual thumb abduction is excluded.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The target-lead handling is nonfatal for <strong>all motors</strong>. When an existing target
+is already outside the window, the adapter retains it, records the discrepancy,
+and does not advance it farther outward. Neural requests back toward the measured
+position and explicit grip-HOLD remain possible. Other motors continue. It does
+not manufacture a corrective motion from zero neural output. This is a pending
+travel limit, not a guarantee of safe force.</p>
+<h2 id="environment-and-command-line-settings">Environment and command-line settings</h2>
+<p><code>.env</code> supplies <code>AB_DEVICE_URL</code>, <code>AB_DEVICE_API_KEY</code>, <code>AB_DEVICE_TIMEOUT</code>, and
+optional <code>AB_TELEMETRY</code>. Use the address and developer key from your registered device.</p>
+<p><code>--port</code> or <code>--serial-number</code> selects the hand. <code>--tactile-port</code> selects the
+separate sensor board (<code>auto</code> only when uniquely identifiable). <code>--env</code> selects
+the credentials file. <code>--baseline</code>, <code>--thumb-setup</code>, and <code>--log-dir</code> select paths
+for locally saved state. <code>--brain</code> selects the graph whose contract must match
+the application and whose hash must match the installed device graph.</p>
+<p><code>--gain</code> multiplies the per-count movements (default 4). <code>--speed</code> (0..32766)
+and <code>--torque</code> (0..1000) explicitly invoke vendor settings for all motors; omission
+leaves those settings unchanged. Do not interpret the vendor torque number as a
+calibrated force in newtons. The application does not enable maximum torque by
+default. <code>--duration</code> requests a timed Hold for a trial.</p>
+<h2 id="manual-thumb-setup">Manual thumb setup</h2>
+<p>First live startup preserves the measured abduction position unless a saved
+<code>thumb_setup.json</code> exists. That file stores logical degrees and the orientation
+in use. Changing orientation invalidates a saved thumb setting; re-establish it
+under the new convention rather than silently reflecting saved data.</p>
+<p>While in Hold: adjust the slider or number, then Apply &amp; save. Slider editing
+alone sends no command. The +/-1 buttons command and save small changes. Lock
+measured position saves what the actuator actually reached. All normal poses,
+coordinate targets and neural outputs retain this locked axis. Thumb flexion
+and tendon activity remain neural. Initial opening is still a direct host
+setup command for the other six motors, not a neural decision.</p>
+<h2 id="unloaded-zero-not-an-object-specific-grip-target">Unloaded zero, not an object-specific grip target</h2>
+<p>Normal live startup captures unloaded offsets/noise after opening and saves
+<code>tactile_baseline.json</code>. Keep the hand empty. The same baseline stays fixed
+throughout the grasp. To redo it, select Hold and click Zero unloaded sensors.</p>
+<p>A first checkout contains no baseline file. Observation mode can acquire readings
+without it but labels the scale uncalibrated; capture unloaded zero in the UI
+before interpreting contact. <code>--no-startup-zero</code> deliberately reuses a saved file
+and requires one to exist. Do not copy another rig's baseline.</p>
+<p>If pressing a pad lowers its reading, change that channel's <code>tactile_directions</code>
+entry and capture a new unloaded zero. Check physical channel order by pressing
+one pad at a time. Sensor attachment pressure can change the unloaded offset.</p>
+<h2 id="editing-the-brain-versus-the-body">Editing the brain versus the body</h2>
+<p>Edit <code>poses.json</code> to author a posture. Edit <code>config.local.json</code> for body and
+transport parameters. Edit <code>aerohand_control/design.py</code> for neural relationships,
+TNorms, operand units and inhibition. Keep neural behavior in the graph and body/transport settings in the adapter so
+you can inspect their effects separately.</p>
+<p>After a neural change:</p>
+<pre><code class="language-bash">python make_brain.py
+python run.py --check
+ab design --brain brain.abdesign.json
+ab build brain --brain brain.abdesign.json --env .env
+</code></pre>
+<p>Wait for READY and run a fresh application. Build again when switching projects
+on a shared device, even when a local file has not changed. Stop/save normally;
+reset dynamics only when deliberately discarding the brain's accumulated state.</p>
+</main><footer><a href="index.html">Getting started</a> · <a href="license.html">License</a></footer></body></html>

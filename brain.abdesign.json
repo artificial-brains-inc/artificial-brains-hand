@@ -1,0 +1,2516 @@
+{
+  "schema": "artificial-brains/design/v1",
+  "name": "Artificial Brains tactile hand v0.0.0",
+  "nodes": [
+    {
+      "name": "goal_thumb_cmc_abd",
+      "kind": "input",
+      "x": 120.0,
+      "y": 120.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_thumb_cmc_abd_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 120.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_thumb_cmc_abd",
+      "kind": "input",
+      "x": 120.0,
+      "y": 360.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_thumb_cmc_abd_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 360.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_abd_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 120.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_abd_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 120.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_abd_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 120.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_cmc_abd_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 120.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_cmc_abd_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 230.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_abd_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 120.0,
+      "neurons": 1
+    },
+    {
+      "name": "thumb_cmc_abd_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 360.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_abd_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 360.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_abd_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 360.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_cmc_abd_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 360.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_cmc_abd_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 470.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_abd_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 360.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_thumb_cmc_flex",
+      "kind": "input",
+      "x": 120.0,
+      "y": 720.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_thumb_cmc_flex_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 720.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_thumb_cmc_flex",
+      "kind": "input",
+      "x": 120.0,
+      "y": 960.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_thumb_cmc_flex_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 960.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_flex_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 720.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_flex_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 720.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_flex_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 720.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_cmc_flex_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 720.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_cmc_flex_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 830.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_flex_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 720.0,
+      "neurons": 1
+    },
+    {
+      "name": "thumb_cmc_flex_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 960.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_cmc_flex_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 960.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_flex_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 960.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_cmc_flex_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 960.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_cmc_flex_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1070.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_cmc_flex_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 960.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_thumb_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 1320.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_thumb_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 1320.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_thumb_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 1560.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_thumb_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 1560.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 1320.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 1320.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 1320.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1320.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1430.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 1320.0,
+      "neurons": 1
+    },
+    {
+      "name": "thumb_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 1560.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "thumb_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 1560.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 1560.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "thumb_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1560.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "thumb_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1670.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "thumb_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 1560.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_index_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 1920.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_index_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_index_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 2160.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_index_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "index_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1920.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "index_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2030.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 1920.0,
+      "neurons": 1
+    },
+    {
+      "name": "index_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "index_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2160.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "index_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2270.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 2160.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_middle_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 2520.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_middle_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 2520.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_middle_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 2760.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_middle_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 2760.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "middle_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 2520.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "middle_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 2520.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "middle_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 2520.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "middle_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2520.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "middle_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2630.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "middle_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 2520.0,
+      "neurons": 1
+    },
+    {
+      "name": "middle_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 2760.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "middle_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 2760.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "middle_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 2760.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "middle_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2760.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "middle_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2870.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "middle_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 2760.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_ring_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 3120.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_ring_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 3120.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_ring_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 3360.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_ring_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 3360.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "ring_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 3120.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "ring_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 3120.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "ring_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 3120.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "ring_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3120.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "ring_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3230.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "ring_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 3120.0,
+      "neurons": 1
+    },
+    {
+      "name": "ring_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 3360.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "ring_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 3360.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "ring_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 3360.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "ring_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3360.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "ring_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3470.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "ring_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 3360.0,
+      "neurons": 1
+    },
+    {
+      "name": "goal_pinky_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 3720.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_pinky_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 3720.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_pinky_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 3960.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_pinky_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 3960.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "pinky_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 3720.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "pinky_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 3720.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "pinky_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 3720.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "pinky_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3720.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "pinky_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3830.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "pinky_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 3720.0,
+      "neurons": 1
+    },
+    {
+      "name": "pinky_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 3960.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "pinky_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 3960.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "pinky_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 3960.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "pinky_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 3960.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "pinky_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 4070.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "pinky_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 3960.0,
+      "neurons": 1
+    },
+    {
+      "name": "touch_thumb",
+      "kind": "input",
+      "x": 120.0,
+      "y": 4500.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_thumb_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 4500.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_thumb_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 4500.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_thumb_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 4500.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_thumb_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 4660.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_thumb_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 4500.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_thumb_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 4500.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    },
+    {
+      "name": "touch_index",
+      "kind": "input",
+      "x": 120.0,
+      "y": 5100.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_index_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 5100.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_index_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 5100.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_index_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5100.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_index_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5260.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_index_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 5100.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_index_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 5100.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    },
+    {
+      "name": "touch_middle",
+      "kind": "input",
+      "x": 120.0,
+      "y": 5700.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_middle_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 5700.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_middle_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 5700.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_middle_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5700.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_middle_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5860.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_middle_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 5700.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_middle_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 5700.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    },
+    {
+      "name": "touch_ring",
+      "kind": "input",
+      "x": 120.0,
+      "y": 6300.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_ring_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 6300.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_ring_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 6300.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_ring_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 6300.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_ring_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 6460.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_ring_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 6300.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_ring_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 6300.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    },
+    {
+      "name": "touch_little",
+      "kind": "input",
+      "x": 120.0,
+      "y": 6900.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_little_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 6900.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_little_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 6900.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_little_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 6900.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_little_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 7060.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_little_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 6900.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_little_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 6900.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    }
+  ],
+  "connections": [
+    {
+      "from": "goal_thumb_cmc_abd",
+      "to": "goal_thumb_cmc_abd_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_thumb_cmc_abd",
+      "to": "position_thumb_cmc_abd_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_thumb_cmc_abd_canonical",
+      "to": "thumb_cmc_abd_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_thumb_cmc_abd_canonical",
+      "to": "thumb_cmc_abd_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_compare_flex",
+      "to": "thumb_cmc_abd_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_flex_theta3",
+      "to": "thumb_cmc_abd_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_flex_theta2",
+      "to": "thumb_cmc_abd_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_flex_beta5",
+      "to": "thumb_cmc_abd_flex",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_flex_beta5",
+      "to": "thumb_cmc_abd_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_flex_reset",
+      "to": "thumb_cmc_abd_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_flex_reset",
+      "to": "thumb_cmc_abd_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_thumb_cmc_abd_canonical",
+      "to": "thumb_cmc_abd_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_thumb_cmc_abd_canonical",
+      "to": "thumb_cmc_abd_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_compare_extend",
+      "to": "thumb_cmc_abd_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_extend_theta3",
+      "to": "thumb_cmc_abd_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_extend_theta2",
+      "to": "thumb_cmc_abd_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_extend_beta5",
+      "to": "thumb_cmc_abd_extend",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_extend_beta5",
+      "to": "thumb_cmc_abd_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_abd_extend_reset",
+      "to": "thumb_cmc_abd_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_extend_reset",
+      "to": "thumb_cmc_abd_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_flex_beta5",
+      "to": "thumb_cmc_abd_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_flex_beta5",
+      "to": "thumb_cmc_abd_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_extend_beta5",
+      "to": "thumb_cmc_abd_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_abd_extend_beta5",
+      "to": "thumb_cmc_abd_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_thumb_cmc_flex",
+      "to": "goal_thumb_cmc_flex_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_thumb_cmc_flex",
+      "to": "position_thumb_cmc_flex_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_thumb_cmc_flex_canonical",
+      "to": "thumb_cmc_flex_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_thumb_cmc_flex_canonical",
+      "to": "thumb_cmc_flex_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_compare_flex",
+      "to": "thumb_cmc_flex_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_flex_theta3",
+      "to": "thumb_cmc_flex_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_flex_theta2",
+      "to": "thumb_cmc_flex_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_flex_beta5",
+      "to": "thumb_cmc_flex_flex",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_flex_beta5",
+      "to": "thumb_cmc_flex_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_flex_reset",
+      "to": "thumb_cmc_flex_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_flex_reset",
+      "to": "thumb_cmc_flex_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_thumb_cmc_flex_canonical",
+      "to": "thumb_cmc_flex_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_thumb_cmc_flex_canonical",
+      "to": "thumb_cmc_flex_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_compare_extend",
+      "to": "thumb_cmc_flex_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_extend_theta3",
+      "to": "thumb_cmc_flex_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_extend_theta2",
+      "to": "thumb_cmc_flex_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_extend_beta5",
+      "to": "thumb_cmc_flex_extend",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_extend_beta5",
+      "to": "thumb_cmc_flex_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_cmc_flex_extend_reset",
+      "to": "thumb_cmc_flex_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_extend_reset",
+      "to": "thumb_cmc_flex_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_flex_beta5",
+      "to": "thumb_cmc_flex_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_flex_beta5",
+      "to": "thumb_cmc_flex_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_extend_beta5",
+      "to": "thumb_cmc_flex_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_cmc_flex_extend_beta5",
+      "to": "thumb_cmc_flex_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_thumb_tendon",
+      "to": "goal_thumb_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_thumb_tendon",
+      "to": "position_thumb_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_thumb_tendon_canonical",
+      "to": "thumb_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_thumb_tendon_canonical",
+      "to": "thumb_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_tendon_compare_flex",
+      "to": "thumb_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_flex_theta3",
+      "to": "thumb_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_flex_theta2",
+      "to": "thumb_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_flex_beta5",
+      "to": "thumb_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_flex_beta5",
+      "to": "thumb_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_flex_reset",
+      "to": "thumb_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_flex_reset",
+      "to": "thumb_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_thumb_tendon_canonical",
+      "to": "thumb_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_thumb_tendon_canonical",
+      "to": "thumb_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "thumb_tendon_compare_extend",
+      "to": "thumb_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_extend_theta3",
+      "to": "thumb_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_extend_theta2",
+      "to": "thumb_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_extend_beta5",
+      "to": "thumb_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_extend_beta5",
+      "to": "thumb_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "thumb_tendon_extend_reset",
+      "to": "thumb_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_extend_reset",
+      "to": "thumb_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_flex_beta5",
+      "to": "thumb_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_flex_beta5",
+      "to": "thumb_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_extend_beta5",
+      "to": "thumb_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "thumb_tendon_extend_beta5",
+      "to": "thumb_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_index_tendon",
+      "to": "goal_index_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_index_tendon",
+      "to": "position_index_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_index_tendon_canonical",
+      "to": "index_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_index_tendon_canonical",
+      "to": "index_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "index_tendon_compare_flex",
+      "to": "index_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_theta3",
+      "to": "index_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_theta2",
+      "to": "index_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_reset",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_reset",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_index_tendon_canonical",
+      "to": "index_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_index_tendon_canonical",
+      "to": "index_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "index_tendon_compare_extend",
+      "to": "index_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_theta3",
+      "to": "index_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_theta2",
+      "to": "index_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_reset",
+      "to": "index_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_reset",
+      "to": "index_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_middle_tendon",
+      "to": "goal_middle_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_middle_tendon",
+      "to": "position_middle_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_middle_tendon_canonical",
+      "to": "middle_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_middle_tendon_canonical",
+      "to": "middle_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "middle_tendon_compare_flex",
+      "to": "middle_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_flex_theta3",
+      "to": "middle_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_flex_theta2",
+      "to": "middle_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_flex_beta5",
+      "to": "middle_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_flex_beta5",
+      "to": "middle_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_flex_reset",
+      "to": "middle_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_flex_reset",
+      "to": "middle_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_middle_tendon_canonical",
+      "to": "middle_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_middle_tendon_canonical",
+      "to": "middle_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "middle_tendon_compare_extend",
+      "to": "middle_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_extend_theta3",
+      "to": "middle_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_extend_theta2",
+      "to": "middle_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_extend_beta5",
+      "to": "middle_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_extend_beta5",
+      "to": "middle_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "middle_tendon_extend_reset",
+      "to": "middle_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_extend_reset",
+      "to": "middle_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_flex_beta5",
+      "to": "middle_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_flex_beta5",
+      "to": "middle_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_extend_beta5",
+      "to": "middle_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "middle_tendon_extend_beta5",
+      "to": "middle_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_ring_tendon",
+      "to": "goal_ring_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_ring_tendon",
+      "to": "position_ring_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_ring_tendon_canonical",
+      "to": "ring_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_ring_tendon_canonical",
+      "to": "ring_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "ring_tendon_compare_flex",
+      "to": "ring_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_flex_theta3",
+      "to": "ring_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_flex_theta2",
+      "to": "ring_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_flex_beta5",
+      "to": "ring_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_flex_beta5",
+      "to": "ring_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_flex_reset",
+      "to": "ring_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_flex_reset",
+      "to": "ring_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_ring_tendon_canonical",
+      "to": "ring_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_ring_tendon_canonical",
+      "to": "ring_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "ring_tendon_compare_extend",
+      "to": "ring_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_extend_theta3",
+      "to": "ring_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_extend_theta2",
+      "to": "ring_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_extend_beta5",
+      "to": "ring_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_extend_beta5",
+      "to": "ring_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "ring_tendon_extend_reset",
+      "to": "ring_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_extend_reset",
+      "to": "ring_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_flex_beta5",
+      "to": "ring_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_flex_beta5",
+      "to": "ring_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_extend_beta5",
+      "to": "ring_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "ring_tendon_extend_beta5",
+      "to": "ring_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "goal_pinky_tendon",
+      "to": "goal_pinky_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_pinky_tendon",
+      "to": "position_pinky_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_pinky_tendon_canonical",
+      "to": "pinky_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_pinky_tendon_canonical",
+      "to": "pinky_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "pinky_tendon_compare_flex",
+      "to": "pinky_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_flex_theta3",
+      "to": "pinky_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_flex_theta2",
+      "to": "pinky_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_flex_beta5",
+      "to": "pinky_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_flex_beta5",
+      "to": "pinky_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_flex_reset",
+      "to": "pinky_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_flex_reset",
+      "to": "pinky_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_pinky_tendon_canonical",
+      "to": "pinky_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_pinky_tendon_canonical",
+      "to": "pinky_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "pinky_tendon_compare_extend",
+      "to": "pinky_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_extend_theta3",
+      "to": "pinky_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_extend_theta2",
+      "to": "pinky_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_extend_beta5",
+      "to": "pinky_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_extend_beta5",
+      "to": "pinky_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "pinky_tendon_extend_reset",
+      "to": "pinky_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_extend_reset",
+      "to": "pinky_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_flex_beta5",
+      "to": "pinky_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_flex_beta5",
+      "to": "pinky_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_extend_beta5",
+      "to": "pinky_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "pinky_tendon_extend_beta5",
+      "to": "pinky_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_thumb",
+      "to": "touch_thumb_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_thumb_theta3",
+      "to": "touch_thumb_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_thumb_theta2",
+      "to": "grip_thumb_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "grip_thumb_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "grip_thumb_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_thumb_reset",
+      "to": "touch_thumb_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_reset",
+      "to": "grip_thumb_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold",
+      "to": "grip_thumb_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_cmc_abd_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_cmc_abd_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_cmc_abd_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_cmc_abd_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_cmc_flex_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_cmc_flex_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_cmc_flex_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_cmc_flex_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_opposition",
+      "to": "thumb_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_thumb_hold_relay",
+      "to": "thumb_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_index",
+      "to": "touch_index_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_index_theta3",
+      "to": "touch_index_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_index_theta2",
+      "to": "grip_index_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "grip_index_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "grip_index_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_reset",
+      "to": "touch_index_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_reset",
+      "to": "grip_index_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold",
+      "to": "grip_index_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold_relay",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold_relay",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_middle",
+      "to": "touch_middle_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_middle_theta3",
+      "to": "touch_middle_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_middle_theta2",
+      "to": "grip_middle_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_middle_opposition",
+      "to": "grip_middle_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_middle_opposition",
+      "to": "grip_middle_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_middle_reset",
+      "to": "touch_middle_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_middle_reset",
+      "to": "grip_middle_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_middle_hold",
+      "to": "grip_middle_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_middle_opposition",
+      "to": "middle_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_middle_opposition",
+      "to": "middle_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_middle_hold_relay",
+      "to": "middle_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_middle_hold_relay",
+      "to": "middle_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_ring",
+      "to": "touch_ring_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_ring_theta3",
+      "to": "touch_ring_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_ring_theta2",
+      "to": "grip_ring_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_ring_opposition",
+      "to": "grip_ring_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_ring_opposition",
+      "to": "grip_ring_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_ring_reset",
+      "to": "touch_ring_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_ring_reset",
+      "to": "grip_ring_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_ring_hold",
+      "to": "grip_ring_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_ring_opposition",
+      "to": "ring_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_ring_opposition",
+      "to": "ring_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_ring_hold_relay",
+      "to": "ring_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_ring_hold_relay",
+      "to": "ring_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_little",
+      "to": "touch_little_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_little_theta3",
+      "to": "touch_little_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_little_theta2",
+      "to": "grip_little_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_little_opposition",
+      "to": "grip_little_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_little_opposition",
+      "to": "grip_little_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_little_reset",
+      "to": "touch_little_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_little_reset",
+      "to": "grip_little_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_little_hold",
+      "to": "grip_little_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_little_opposition",
+      "to": "pinky_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_little_opposition",
+      "to": "pinky_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_little_hold_relay",
+      "to": "pinky_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_little_hold_relay",
+      "to": "pinky_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    }
+  ]
+}

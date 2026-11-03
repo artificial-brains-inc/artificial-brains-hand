@@ -1,0 +1,3 @@
+artificialbrains_sdk==0.4.0
+aero-open-sdk==0.1.0.dev1
+pyserial==3.5

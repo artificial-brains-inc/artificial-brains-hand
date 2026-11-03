@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How the brain regulates grip · Artificial Brains</title><link rel="stylesheet" href="style.css"></head>
+<body><header><strong>Artificial Brains · Tactile Hand</strong><nav aria-label="Documentation">
+<a href="index.html">Get started</a><a href="neural-grip.html">Neural grip</a><a href="configuration.html">Configuration</a><a href="sensors.html">Sensors</a><a href="testing.html">Testing</a>
+</nav></header><main><h1 id="how-the-brain-regulates-grip">How the brain regulates grip</h1>
+<p><a href="index.html">Getting started</a> · <a href="configuration.html">Configuration</a> · <a href="sensors.html">Sensors</a></p>
+<p>Build a grip response from position comparisons, motor primitives, touch, and
+inhibition. This guide follows one finger through the included brain so you can
+inspect the activity, understand each relationship, and try your own changes.</p>
+<p>The reference is the <em>Introductory Guide to Building an Artificial Brain</em>,
+Expanded developer and agent booklet v0.5, available with the
+<a href="https://github.com/artificial-brains-inc/artificial_brains">Artificial Brains SDK and public guidelines</a>.
+Chapter and page references below point to that guide. Use the
+<a href="https://github.com/artificial-brains-inc/artificial_brains/blob/main/README.md">SDK README</a>
+for application integration and <a href="https://github.com/artificial-brains-inc/artificial_brains/blob/main/AGENTS.md">AGENTS.md</a>
+for construction conventions.</p>
+<h2 id="open-the-example">Open the example</h2>
+<p>From the repository root, after installation:</p>
+<pre><code class="language-bash">source .venv/bin/activate
+python run.py --check
+ab design --brain brain.abdesign.json
+</code></pre>
+<p>The walkthrough below follows the index finger in that full-hand graph. The
+Python blocks in sections 3–5 form one complete design when run in order.
+The same code is provided in <a href="../../examples/index_grip.py">examples/index_grip.py</a>,
+so you can generate and inspect it directly:</p>
+<pre><code class="language-bash">python examples/index_grip.py
+ab design --brain examples/index-grip.abdesign.json
+</code></pre>
+<p>This creates a separate teaching design without changing <code>brain.abdesign.json</code>.
+Use the <strong>full-hand</strong> design with <code>run.py</code>; the one-finger design has a different
+input/output contract. To build and run the full hand, follow
+<a href="index.html#3-explore-and-build-the-brain">Explore and build the brain</a>.</p>
+<h2 id="1-the-computational-building-blocks">1. The computational building blocks</h2>
+<p>An <strong>Oscillatory Processing Unit (OPU)</strong> is a population of synthetic neurons with a shared rhythm and an operating point, TNorm. Computation belongs to directed source-to-target relationships, not to a rhythm label alone. The booklet calls the resulting neural state an <strong>Oscillatory Occupancy State (OOS)</strong> (chapter 01, p. 1).</p>
+<p>TNorm selects a neural operating point. Keep <strong>2.01</strong> distinct from 2: that precision is part of the motor primitive. Inhibitory <code>strength=1</code> uses the calculated reference strength; the resulting suppression depends on the connected activity. TNorm, inhibitory strength, and physical motor gain are separate settings (chapters 04 and 06, pp. 3 and 6).</p>
+<p>The body supplies observations. The brain compares desired and measured positions and produces motor and inhibition states. The application handles sensor scaling, motor-command translation, and mechanical limits. Following these responsibilities separately makes the activity easier to interpret.</p>
+<h2 id="2-circuit-inventory">2. Circuit inventory</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Count and representation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Desired actuator positions</td>
+<td>7 input populations, each 64 elements</td>
+</tr>
+<tr>
+<td>Measured actuator positions</td>
+<td>7 input populations, each 64 elements</td>
+</tr>
+<tr>
+<td>Fingertip contact</td>
+<td>5 input populations, each 64 elements</td>
+</tr>
+<tr>
+<td>Motor primitives</td>
+<td>14: one FLEX and one EXTEND per motor</td>
+</tr>
+<tr>
+<td>Motor outputs</td>
+<td>14 one-neuron bistable outputs</td>
+</tr>
+<tr>
+<td>Grip-HOLD outputs</td>
+<td>5 one-neuron bistable outputs</td>
+</tr>
+<tr>
+<td>Internal OPUs</td>
+<td>109</td>
+</tr>
+<tr>
+<td>Total named populations</td>
+<td>147</td>
+</tr>
+<tr>
+<td>Connections</td>
+<td>236</td>
+</tr>
+</tbody>
+</table></div>
+<p>There are <strong>19 external inputs and 19 outputs</strong>. Each input carries a goal or physical observation; comparisons and tactile opposition are internal populations. Outputs stream continuously without an ACK population. All input widths are 64, below the booklet's recommended 156-element maximum for these receiving Theta pathways. The build calculates the total neuron allocation; a population contains multiple neurons (chapter 05, p. 4).</p>
+<p>The graph retains the abduction pair for a uniform I/O contract, but the physical adapter ignores its movement and HOLD requests while the manual thumb lock is in force. The other two thumb motors and four tendon motors are active.</p>
+<h2 id="3-give-the-brain-an-intention-and-a-body-observation">3. Give the brain an intention and a body observation</h2>
+<p>The UI supplies seven actuator coordinates, either entered directly or obtained from a named posture such as Grab. Vendor geometry converts a compact joint pose into actuator goals. These coordinates are the intention supplied to the brain; its ongoing neural comparisons generate the movement toward them.</p>
+<p>Desired and measured angles are independently mapped into the same actuator-range representation. No desired-minus-measured error is calculated by the encoder. For the index motor, the input names are <code>goal_index_tendon</code> and <code>position_index_tendon</code>.</p>
+<p>Each enters its own <strong>Theta T2 representation</strong>, then two separate <strong>Theta T2 comparison OPUs</strong>. The matching immediate sources are important: the representation and comparison remain distinct populations even though their rhythm and TNorm match (chapter 06, p. 5; chapter 09, p. 10).</p>
+<pre><code class="language-python">from ab import Brain
+
+brain = Brain(&quot;Index finger tactile grip&quot;)
+brain.input(&quot;goal_index_tendon&quot;, 64)
+brain.input(&quot;position_index_tendon&quot;, 64)
+brain.opu(&quot;goal_index_tendon_canonical&quot;, &quot;theta&quot;, 2)
+brain.opu(&quot;position_index_tendon_canonical&quot;, &quot;theta&quot;, 2)
+brain.opu(&quot;index_tendon_compare_flex&quot;, &quot;theta&quot;, 2)
+brain.opu(&quot;index_tendon_compare_extend&quot;, &quot;theta&quot;, 2)
+
+brain.connect(&quot;goal_index_tendon&quot;, &quot;goal_index_tendon_canonical&quot;)
+brain.connect(&quot;position_index_tendon&quot;, &quot;position_index_tendon_canonical&quot;)
+brain.connect(&quot;goal_index_tendon_canonical&quot;, &quot;index_tendon_compare_flex&quot;,
+              role=&quot;operand&quot;, units=1)
+brain.connect(&quot;position_index_tendon_canonical&quot;, &quot;index_tendon_compare_flex&quot;, &quot;inh&quot;,
+              role=&quot;operand&quot;, units=1)
+brain.connect(&quot;position_index_tendon_canonical&quot;, &quot;index_tendon_compare_extend&quot;,
+              role=&quot;operand&quot;, units=1)
+brain.connect(&quot;goal_index_tendon_canonical&quot;, &quot;index_tendon_compare_extend&quot;, &quot;inh&quot;,
+              role=&quot;operand&quot;, units=1)
+</code></pre>
+<p>The matched contributions oppose each other, leaving activity for the direction of the discrepancy. Follow that activity over the receiving rhythm: a single silent frame can occur during a rhythmic response and is not enough to establish that the positions match (chapter 09, p. 10).</p>
+<h2 id="4-turn-comparison-evidence-into-motor-activity">4. Turn comparison evidence into motor activity</h2>
+<p>For each motor and each direction:</p>
+<pre><code class="language-text">Theta T2 comparison
+    -&gt; Theta T3 preparation
+    -&gt; Theta T2.01
+    -&gt; Beta T5 motor
+    -&gt; FLEX or EXTEND output
+</code></pre>
+<p>The <strong>Theta T3 → Theta T2.01 → Beta T5 → output</strong> relationship follows the motor primitive in chapters 08 and 13 (pp. 7–8 and 15). FLEX and EXTEND each have a complete path; other fingers can act simultaneously.</p>
+<p>A Beta T3 reset, driven by that direction's motor Beta T5, inhibits its own Theta T2.01 and its output. FLEX motor Beta T5 also inhibits EXTEND Theta T2.01 and the EXTEND output, and EXTEND does the reverse. Every explicit reset and antagonist inhibition in this graph uses <code>strength=1.0</code>.</p>
+<p>This makes three states worth distinguishing: the comparison's evidence, the motor OPU's activity, and the output's held state. A bistable output can outlast the activity that activated it. Clearing the internal pathway alone is insufficient (chapter 13, p. 16).</p>
+<p>Add both motor pathways to the same <code>brain</code> object:</p>
+<pre><code class="language-python">brain.opu(&quot;index_tendon_flex_theta3&quot;, &quot;theta&quot;, 3)
+brain.opu(&quot;index_tendon_flex_theta2&quot;, &quot;theta&quot;, 2.01)
+brain.opu(&quot;index_tendon_flex_beta5&quot;, &quot;beta&quot;, 5)
+brain.opu(&quot;index_tendon_flex_reset&quot;, &quot;beta&quot;, 3)
+brain.output(&quot;index_tendon_flex&quot;)
+brain.opu(&quot;index_tendon_extend_theta3&quot;, &quot;theta&quot;, 3)
+brain.opu(&quot;index_tendon_extend_theta2&quot;, &quot;theta&quot;, 2.01)
+brain.opu(&quot;index_tendon_extend_beta5&quot;, &quot;beta&quot;, 5)
+brain.opu(&quot;index_tendon_extend_reset&quot;, &quot;beta&quot;, 3)
+brain.output(&quot;index_tendon_extend&quot;)
+
+brain.connect(&quot;index_tendon_compare_flex&quot;, &quot;index_tendon_flex_theta3&quot;)
+brain.connect(&quot;index_tendon_flex_theta3&quot;, &quot;index_tendon_flex_theta2&quot;)
+brain.connect(&quot;index_tendon_flex_theta2&quot;, &quot;index_tendon_flex_beta5&quot;)
+brain.connect(&quot;index_tendon_flex_beta5&quot;, &quot;index_tendon_flex&quot;)
+brain.connect(&quot;index_tendon_flex_beta5&quot;, &quot;index_tendon_flex_reset&quot;)
+brain.connect(&quot;index_tendon_flex_reset&quot;, &quot;index_tendon_flex_theta2&quot;, &quot;inh&quot;,
+              role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;index_tendon_flex_reset&quot;, &quot;index_tendon_flex&quot;, &quot;inh&quot;, strength=1)
+
+brain.connect(&quot;index_tendon_compare_extend&quot;, &quot;index_tendon_extend_theta3&quot;)
+brain.connect(&quot;index_tendon_extend_theta3&quot;, &quot;index_tendon_extend_theta2&quot;)
+brain.connect(&quot;index_tendon_extend_theta2&quot;, &quot;index_tendon_extend_beta5&quot;)
+brain.connect(&quot;index_tendon_extend_beta5&quot;, &quot;index_tendon_extend&quot;)
+brain.connect(&quot;index_tendon_extend_beta5&quot;, &quot;index_tendon_extend_reset&quot;)
+brain.connect(&quot;index_tendon_extend_reset&quot;, &quot;index_tendon_extend_theta2&quot;, &quot;inh&quot;,
+              role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;index_tendon_extend_reset&quot;, &quot;index_tendon_extend&quot;, &quot;inh&quot;, strength=1)
+
+brain.connect(&quot;index_tendon_flex_beta5&quot;, &quot;index_tendon_extend_theta2&quot;, &quot;inh&quot;,
+              role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;index_tendon_flex_beta5&quot;, &quot;index_tendon_extend&quot;, &quot;inh&quot;, strength=1)
+brain.connect(&quot;index_tendon_extend_beta5&quot;, &quot;index_tendon_flex_theta2&quot;, &quot;inh&quot;,
+              role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;index_tendon_extend_beta5&quot;, &quot;index_tendon_flex&quot;, &quot;inh&quot;, strength=1)
+</code></pre>
+<h2 id="5-let-touch-oppose-closing">5. Let touch oppose closing</h2>
+<p>The index's physical pad supplies <code>touch_index</code>, not a computed label such as <code>ENOUGH_GRIP</code>. Its neural chain is:</p>
+<pre><code class="language-text">touch_index
+    -&gt; touch_index_theta3  [Theta T3]
+    -&gt; touch_index_theta2  [Theta T2.01]
+    -&gt; grip_index_opposition  [Beta T5]
+</code></pre>
+<p>The opposition population inhibits <strong>index FLEX Theta T2.01</strong> and the <strong>index FLEX output</strong>, and excites the separate <strong>grip_index_hold</strong> output. It does not inhibit the extension path.</p>
+<pre><code class="language-python"># Continue with the position comparisons and both motor paths above.
+brain.input(&quot;touch_index&quot;, 64)
+brain.opu(&quot;touch_index_theta3&quot;, &quot;theta&quot;, 3)
+brain.opu(&quot;touch_index_theta2&quot;, &quot;theta&quot;, 2.01)
+brain.opu(&quot;grip_index_opposition&quot;, &quot;beta&quot;, 5)
+brain.opu(&quot;grip_index_reset&quot;, &quot;beta&quot;, 3)
+brain.output(&quot;grip_index_hold&quot;)
+brain.opu(&quot;grip_index_hold_relay&quot;, &quot;high-gamma&quot;, 10)
+
+brain.connect(&quot;touch_index&quot;, &quot;touch_index_theta3&quot;)
+brain.connect(&quot;touch_index_theta3&quot;, &quot;touch_index_theta2&quot;)
+brain.connect(&quot;touch_index_theta2&quot;, &quot;grip_index_opposition&quot;)
+brain.connect(&quot;grip_index_opposition&quot;, &quot;index_tendon_flex_theta2&quot;, &quot;inh&quot;, strength=1)
+brain.connect(&quot;grip_index_opposition&quot;, &quot;index_tendon_flex&quot;, &quot;inh&quot;, strength=1)
+brain.connect(&quot;grip_index_opposition&quot;, &quot;grip_index_hold&quot;)
+
+brain.connect(&quot;grip_index_opposition&quot;, &quot;grip_index_reset&quot;)
+brain.connect(&quot;grip_index_reset&quot;, &quot;touch_index_theta2&quot;, &quot;inh&quot;, role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;grip_index_reset&quot;, &quot;grip_index_hold&quot;, &quot;inh&quot;, strength=1)
+brain.connect(&quot;grip_index_hold&quot;, &quot;grip_index_hold_relay&quot;)
+brain.connect(&quot;grip_index_hold_relay&quot;, &quot;index_tendon_flex_theta2&quot;, &quot;inh&quot;,
+              role=&quot;feedback&quot;, strength=1)
+brain.connect(&quot;grip_index_hold_relay&quot;, &quot;index_tendon_flex&quot;, &quot;inh&quot;, strength=1)
+</code></pre>
+<p>The HOLD relay supplies ongoing closing inhibition while the HOLD output is active. Its high-gamma operating point is explicitly T10. The Beta T3 reset clears both the tactile Theta T2.01 state and the HOLD output. Continued touch can re-excite the path. It is not an irreversible latch.</p>
+<p>The ordinary HOLD-output-to-relay excitation is the relay's forward drive. The relay's inhibitory return to the motor OPU is marked feedback; output-clearing edges do not receive OPU-only roles. Keep those roles when reusing the pathway.</p>
+<p>Each pad regulates its finger. Thumb touch connects to the thumb's three FLEX paths in the graph; the adapter's manual abduction lock keeps that one physical axis fixed.</p>
+<p>Save the one-finger design after adding the tactile pathway:</p>
+<pre><code class="language-python">from pathlib import Path
+
+output = Path(&quot;examples/index-grip.abdesign.json&quot;)
+output.parent.mkdir(parents=True, exist_ok=True)
+brain.save(str(output))
+</code></pre>
+<p>The complete script performs these declarations in order, validates the public
+design, and saves to that location. It does not connect to hardware or start a
+neural session.</p>
+<h2 id="6-what-enough-grip-means-in-this-example">6. What &quot;enough grip&quot; means in this example</h2>
+<p>The coordinate comparison supports further closing. Tactile activity supplies opposition within the circuit. Their evolving neural states determine the motor and HOLD outputs. As the physical finger moves, both its position and its contact observation change, and the interaction continues.</p>
+<p>Here, &quot;enough&quot; means <strong>the tactile pathway has recruited a state that suppresses additional closure and may request grip-HOLD</strong>. You provide a target posture rather than a per-object pressure setting. The response is shaped by the operating points, connections, current sensory activity, and recent neural state.</p>
+<p>This example explores self-regulation through that feedback loop. Its contact scale is relative, and the circuit does not estimate force in newtons or object weight. It has no explicit association-memory primitive: adapting activity during contact and learning a persistent association are different experiments (chapter 02, p. 2).</p>
+<h2 id="7-why-the-driver-executes-a-neural-hold">7. Why the driver executes a neural HOLD</h2>
+<p>The hand accepts persistent <strong>position targets</strong>. Suppose the motor is measured at 80 degrees while the most recent command is 88 degrees. Silencing FLEX would prevent new increments, but the motor could still pursue 88 degrees.</p>
+<p>A neural grip-HOLD tells the adapter to cancel remaining closing travel. It moves the target back toward the current measured position without moving an already opening target farther into closure, suppresses simultaneous closing increments, and preserves neural extension. HOLD is decoded <strong>before</strong> opposing motor counts are added, so a simultaneous extension is not cancelled by a flex count that HOLD has suppressed.</p>
+<p>This rule is body-command translation, implemented in <code>body_commands.py</code> and <code>hand.py</code>. The brain triggers it through a named output; raw pressure is not passed to <code>apply_deltas()</code>. The actuator electronics execute the resulting target. HOLD is not torque disable and does not command an exact force.</p>
+<p>The UI's whole-hand Hold, startup opening, manual thumb positioning, serial recovery, joint bounds, and target-lead limiting are separate host operations. The movement log distinguishes these from a neural grip-HOLD, following the controller role described in chapter 13, p. 16.</p>
+<h2 id="8-bring-touch-into-the-brain">8. Bring touch into the brain</h2>
+<p>The host acquires an unloaded baseline and idle-noise band, fixes them for the run, then scales each contact signal using remaining ADC headroom. For a positive-polarity sensor the normalized observation is:</p>
+<pre><code class="language-text">clip((raw_adc - unloaded_baseline - noise_band)
+     / (4095 - unloaded_baseline - noise_band), 0, 1)
+</code></pre>
+<p>Negative polarity reverses the observed change and uses headroom toward zero. The noise band removes idle variation; it is separate from the neural grip response. Compare the raw and normalized readings in the UI when checking a sensor.</p>
+<p>The normalized contact amount becomes a 64-element cumulative vector with a fractional final bin. Zero produces all zeros; small observations remain small. <code>vector_f32</code> supplies those amplitudes to the SDK. The vector encodes one physical sensor; the receiving populations form its neural response. It is distinct from the internal fuzzy-condition banks described in chapter 09.</p>
+<h2 id="9-output-timing-and-motor-gains">9. Output timing and motor gains</h2>
+<p>The example consumes completed output frames, including empty and repeated active frames. Each fresh active motor count contributes its configured degree increment; a held output can therefore advance the target over several frames. A reset/clearing path is essential to the intended action lifetime.</p>
+<p>Input polling is paced to observed transport throughput and capped by configuration. Neural rhythms run independently of the polling rate. With continuous outputs and no ACK, an output frame is not explicitly matched to an individual observation. During startup, the application receives 65 completed events with motor writes disabled while pending input observations drain. Use one input-producing application per device.</p>
+<p>A slow finger may have sparse neural output, strong opposition, a HOLD latch, stale feedback, or a host movement limit. Increasing <code>--gain</code> changes physical displacement per count; it does not change TNorm or create missing neural activity.</p>
+<h2 id="experiments-to-try">Experiments to try</h2>
+<h3 id="follow-one-finger">Follow one finger</h3>
+<p>Start in observation mode or with an empty hand. Observe the index goal/position representations, the two comparison populations, motor Theta T2.01, motor Beta T5, FLEX/EXTEND outputs, tactile opposition, and HOLD together. Examine complete activity patterns over time.</p>
+<p>Then compare unloaded contact with a modest pad press. Inspect whether the tactile state changes, FLEX is inhibited, HOLD appears and clears, and opening remains available. In a live trial, compare <code>outputs.jsonl</code> with <code>motion.jsonl</code>: <code>neural_grip_hold</code> is different from <code>target_lead</code> or <code>coupled_joint_model</code>.</p>
+<h3 id="change-tactile-opposition">Change tactile opposition</h3>
+<p>In <code>aerohand_control/design.py</code>, <code>VETO_STRENGTH</code> sets the tactile-to-FLEX inhibition and is initially <code>1.0</code>. Change that relationship while keeping the matched position-comparison operand units at 1. Regenerate and rebuild, then compare the tactile opposition, motor activity, output clearing, and resulting movement. Changing a subtraction operand changes the comparison itself, so study it as a separate experiment.</p>
+<p>Use these commands after a neural edit:</p>
+<pre><code class="language-bash">python make_brain.py
+python run.py --check
+ab design --brain brain.abdesign.json
+ab build brain --brain brain.abdesign.json --env .env
+</code></pre>
+<p>Wait for READY, then launch the application with the run command in the <a href="index.html#4-run-the-hand">README</a>.</p>
+<h3 id="connect-a-new-observation">Connect a new observation</h3>
+<p>Add a meaningful sensor signal and let an internal sensory pathway carry it to the motor circuitry. Reuse complete source-to-target relationships, preserve the clearing paths, and let the build check the neuron budget. Observe the new source, its receiving population, the motor output, and the physical response together. The booklet's sensory, decision, and motor chapters provide further starting relationships to explore.</p>
+</main><footer><a href="index.html">Getting started</a> · <a href="license.html">License</a></footer></body></html>

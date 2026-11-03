@@ -1,0 +1,141 @@
+{
+  "units": "compact_joint_degrees",
+  "joint_order": [
+    "thumb_cmc_abd",
+    "thumb_cmc_flex",
+    "thumb_mcp_ip",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "notes": "Compact joint coordinates. The application applies motor orientation before vendor coupled geometry. The manually selected abduction target is preserved during control.",
+  "poses": {
+    "open": {
+      "description": "Open palm; thumb orientation resolved together with its coupled tendon targets",
+      "joint_degrees": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "origin": "coupling-consistent-open",
+      "source": "All compact flexion coordinates extended; manually selected thumb abduction is preserved."
+    },
+    "pinch": {
+      "description": "Thumb-index pinch pose",
+      "joint_degrees": [
+        75,
+        25,
+        30,
+        50,
+        0,
+        0,
+        0
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/run_sequence.py"
+    },
+    "pinch_middle": {
+      "description": "Thumb-middle pinch pose",
+      "joint_degrees": [
+        83,
+        42,
+        23,
+        0,
+        50,
+        0,
+        0
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/run_sequence.py"
+    },
+    "pinch_ring": {
+      "description": "Thumb-ring pinch pose",
+      "joint_degrees": [
+        100,
+        42,
+        23,
+        0,
+        0,
+        52,
+        0
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/run_sequence.py"
+    },
+    "pinch_pinky": {
+      "description": "Thumb-pinky pinch pose",
+      "joint_degrees": [
+        100,
+        35,
+        23,
+        0,
+        0,
+        0,
+        50
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/run_sequence.py"
+    },
+    "grab": {
+      "description": "Power grasp pose",
+      "joint_degrees": [
+        100,
+        55,
+        30,
+        60,
+        60,
+        60,
+        60
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/power_grasp.py"
+    },
+    "peace": {
+      "description": "Index and middle extended, ring and pinky flexed",
+      "joint_degrees": [
+        90,
+        45,
+        60,
+        0,
+        0,
+        90,
+        90
+      ],
+      "origin": "vendor",
+      "source": "https://github.com/Chestnut-Robotics/aero-hand-open/blob/7bb2f23485a7d440960c21046da642de132b7745/sdk/examples/run_sequence.py"
+    },
+    "middle_finger": {
+      "description": "Middle finger extended, other fingers curled, thumb tucked. Editable starting pose.",
+      "joint_degrees": [
+        75,
+        25,
+        30,
+        70,
+        0,
+        70,
+        70
+      ],
+      "origin": "proposed",
+      "source": "Example gesture. Inspect and adapt to your hand."
+    },
+    "point": {
+      "description": "Index extended; other fingers partially flexed. Proposed starting pose, not a vendor-tested preset.",
+      "joint_degrees": [
+        75,
+        25,
+        30,
+        0,
+        60,
+        60,
+        60
+      ],
+      "origin": "proposed",
+      "source": "Example starting posture. Inspect and adapt to your hand."
+    }
+  }
+}

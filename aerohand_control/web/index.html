@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artificial Brains · Hand Control</title>
+  <link rel="icon" type="image/png" href="assets/artificial-brains-logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="brand.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Artificial Brains hand control home">
+        <img class="ab-logo" src="assets/artificial-brains-logo.png" alt="Artificial Brains" width="164" height="116">
+        <span class="brand-caption">PRIMA-LUX<span>HAND CONTROL</span></span>
+      </a>
+      <div class="topbar-right">
+        <span id="preview-badge" class="preview-badge" hidden>Interface preview</span>
+        <span id="connection" class="connection"><i aria-hidden="true"></i><span>Connecting</span></span>
+        <span id="version" class="version"></span>
+      </div>
+    </header>
+
+    <main>
+      <div class="section-heading">
+        <div><p class="eyebrow">HAND CONTROL</p><h1>Reach. Feel. Hold.</h1></div>
+        <p class="device"><span class="device-dot" aria-hidden="true"></span><span id="device">Waiting for controller</span></p>
+      </div>
+
+      <div class="startup-note" id="startup-note" role="status" hidden></div>
+      <div id="error-banner" class="error-banner" role="alert" hidden></div>
+
+      <section class="tactile-panel thumb-panel" aria-label="Manual thumb setup">
+        <div class="panel-heading"><div><p class="eyebrow">MANUAL SETUP</p><h3>Thumb position</h3></div><span id="thumb-lock-badge" class="unit-badge">FIXED DURING GRASP</span></div>
+        <p class="sensor-help">Set the thumb sideways angle once. Open, Grab and neural output keep this motor fixed. Thumb bending and the other fingers remain under neural control.</p>
+        <div class="thumb-controls">
+          <button id="thumb-minus" class="action-button" type="button" aria-label="Move thumb minus one degree">−1°</button>
+          <label class="thumb-number-label" for="thumb-angle">Logical angle <input id="thumb-angle" type="number" min="0" max="100" step="0.1" value="17" inputmode="decimal"></label>
+          <button id="thumb-plus" class="action-button" type="button" aria-label="Move thumb plus one degree">+1°</button>
+          <button id="thumb-apply" class="action-button thumb-primary" type="button">Apply &amp; save</button>
+          <button id="thumb-current" class="action-button" type="button">Lock measured position</button>
+        </div>
+        <label class="thumb-slider-label" for="thumb-slider">Adjust target <input id="thumb-slider" type="range" min="0" max="100" step="0.1" value="17"></label>
+        <p id="thumb-readout" class="thumb-readout" aria-live="polite">Waiting for measured thumb position.</p>
+        <p id="thumb-setup-help" class="sensor-help">Select Hold to adjust. Slider changes are sent only with Apply &amp; save. The ±1° buttons send one adjustment.</p>
+      </section>
+
+      <div class="dashboard">
+        <section class="command-section" aria-label="Pose controls">
+          <div id="command-panel" class="command-panel">
+            <div class="command-topline"><span class="eyebrow">CURRENT COMMAND</span><span id="phase" class="phase">Connecting</span></div>
+            <div class="command-main">
+              <div class="command-copy"><h2 id="current-command" aria-live="polite">Hold</h2><p id="command-description">Ready when you are.</p></div>
+              <div id="hero-icon" class="hero-icon" aria-hidden="true"></div>
+            </div>
+            <div class="command-bottom"><span id="command-detail">Waiting for the controller…</span><span id="target-badge" class="target-badge" hidden>At target</span></div>
+          </div>
+
+          <div class="controls-row">
+            <div class="amount-control">
+              <div class="amount-heading"><label for="amount">Posture amount</label><output id="amount-output" for="amount">100<span>%</span></output></div>
+              <input id="amount" type="range" min="0" max="100" step="5" value="100" aria-describedby="amount-help">
+              <p id="amount-help">Applies to the next pose. This is position, not grip force.</p>
+            </div>
+            <button id="hold-button" class="hold-button" type="button" disabled><span class="pause-icon" aria-hidden="true"></span><span>Hold<small>Keep this position</small></span><kbd>SPACE</kbd></button>
+          </div>
+
+          <div class="pose-heading"><h3>Choose a pose</h3><span>One click to move</span></div>
+          <div id="pose-grid" class="pose-grid" aria-label="Available poses"></div>
+          <div class="keyboard-hint"><span><kbd>1</kbd>–<kbd>6</kbd> Quick poses</span><span><kbd>SPACE</kbd> Hold</span></div>
+        </section>
+
+        <aside class="telemetry-section" aria-label="Hand status">
+          <section class="motor-panel">
+            <div class="panel-heading"><div><p class="eyebrow">LIVE FEEDBACK</p><h3>Motor positions</h3></div><span class="unit-badge">DEG</span></div>
+            <div class="motor-legend"><span><i class="actual-legend" aria-hidden="true"></i>Measured</span><span><i class="goal-legend" aria-hidden="true"></i>Goal</span></div>
+            <div id="motor-list" class="motor-list"></div>
+            <p id="feedback-note" class="feedback-note">Motor angles update while the hand is connected.</p>
+          </section>
+          <section class="session-panel">
+            <div><span class="status-dot" id="session-dot" aria-hidden="true"></span><h3 id="session-title">Connecting to controller</h3></div>
+            <p id="message" aria-live="polite">The control interface will be ready shortly.</p>
+            <button id="stop-button" class="stop-button" type="button" disabled><span class="stop-icon" aria-hidden="true"></span>Stop brain</button>
+            <p class="stop-help">Holds the hand and saves neural dynamics.</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="tactile-panel" aria-label="Tactile feedback and neural grip activity">
+        <div class="panel-heading"><div><p class="eyebrow">FIVE FINGERTIP SENSORS</p><h3>Grip feedback</h3></div><span id="tactile-link" class="unit-badge">Waiting for sensors</span></div>
+        <p class="sensor-help">Choose a pose or enter coordinates. Tactile activity opposes closing inside the brain. Unloaded zeroing removes sensor offsets only; the brain still determines when contact opposes closing. No per-object grip target. Readings are ADC, not newtons.</p>
+        <div class="zero-controls">
+          <button id="capture-zero" class="action-button" type="button" disabled>Zero unloaded sensors</button>
+          <span id="zero-status">Select Hold. Keep all five pads free of contact.</span>
+        </div>
+        <div id="tactile-grid" class="tactile-grid"></div>
+        <p id="tactile-note" class="feedback-note">Contact opposition and grip-HOLD decisions run in the brain; opening remains available.</p>
+      </section>
+      <section class="tactile-panel" aria-label="Motor and telemetry diagnostics">
+        <div class="panel-heading"><div><p class="eyebrow">NEURAL REQUESTS AND MOTOR DELIVERY</p><h3>Movement diagnostics</h3></div><span id="output-rate" class="unit-badge">No output yet</span></div>
+        <p id="speed-note" class="sensor-help">Counts below are observations, not a controller decision about which motor should move.</p>
+        <div class="diagnostic-scroll"><table class="diagnostic-table"><thead><tr><th>Motor</th><th>FLEX / EXTEND counts</th><th>Both active</th><th>Grip HOLD frames</th><th>Requested / applied °</th><th>Last body limit</th></tr></thead><tbody id="diagnostic-rows"></tbody></table></div>
+        <p id="serial-note" class="sensor-help"></p>
+        <h3>Telemetry recording</h3><p id="log-status" class="sensor-help">Starting the session recorder...</p>
+        <code id="log-path" class="log-path">No session yet</code>
+        <p id="neuron-log-status" class="sensor-help">Neuron activity is recorded separately from motor output counts.</p>
+      </section>
+      <section class="tactile-panel" aria-label="Explicit motor targets">
+        <div class="panel-heading"><div><p class="eyebrow">COORDINATE TARGETS</p><h3>Six neural targets + fixed thumb</h3></div><span class="unit-badge">DEGREES</span></div>
+        <p class="sensor-help">These are logical actuator angles, with the thumb direction correction applied. A contacted finger may stop before its requested target.</p>
+        <div id="target-inputs" class="target-inputs"></div>
+        <button id="use-measured" class="action-button" type="button">Copy measured positions</button>
+        <button id="send-targets" class="action-button" type="button">Send coordinate targets</button>
+      </section>
+    </main>
+
+    <footer><span>ARTIFICIAL BRAINS · SYNTHETIC NEURONS FOR ROBOTS</span><span>Six neural motor channels. One manually fixed thumb axis.</span></footer>
+  </div>
+</body>
+</html>

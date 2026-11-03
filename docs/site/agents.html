@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Working on the tactile hand example · Artificial Brains</title><link rel="stylesheet" href="style.css"></head>
+<body><header><strong>Artificial Brains · Tactile Hand</strong><nav aria-label="Documentation">
+<a href="index.html">Get started</a><a href="neural-grip.html">Neural grip</a><a href="configuration.html">Configuration</a><a href="sensors.html">Sensors</a><a href="testing.html">Testing</a>
+</nav></header><main><h1 id="working-on-the-tactile-hand-example">Working on the tactile hand example</h1>
+<p>Read <a href="index.html">README.md</a> and <a href="neural-grip.html">the neural-grip guide</a> before
+changing the application. Use the <a href="https://github.com/artificial-brains-inc/artificial_brains">Artificial Brains SDK and guidelines</a>
+for neural design conventions.</p>
+<h2 id="keep-the-responsibilities-clear">Keep the responsibilities clear</h2>
+<p>The brain performs signed position comparisons, tactile closing opposition,
+output clearing, and grip-HOLD generation. Python supplies separately encoded
+goals, measured positions, and touch observations, then translates neural outputs
+into physical commands.</p>
+<p>Sensor zeroing, manual thumb setup, startup opening, operator Hold/Stop, serial
+recovery, transport pacing, and mechanical limits belong to the application.
+Keep grip decisions in the neural circuit rather than adding Python pressure
+cutoffs, error-sign decisions, or candidate-score selection.</p>
+<h2 id="preserve-the-primitive-relationships">Preserve the primitive relationships</h2>
+<ul>
+<li>Retain the complete Theta T3 → Theta T2.01 → Beta T5 motor chains.</li>
+<li>Clear bistable outputs as well as internal motor states in reset and antagonist
+paths. Tactile opposition leaves EXTEND available.</li>
+<li>Give arithmetic operands matched immediate representations, explicit
+<code>role=&quot;operand&quot;</code>, positive <code>units</code>, and the appropriate connection sign.</li>
+<li>Keep inhibition strength, operand units, TNorm, and physical motor gain distinct.</li>
+<li>High-gamma can be used throughout the circuit with an explicit TNorm.</li>
+</ul>
+<p>Edit <code>aerohand_control/design.py</code>, then regenerate and inspect both exports:</p>
+<pre><code class="language-bash">python make_brain.py
+python run.py --check
+ab design --brain brain.abdesign.json
+ab build brain --brain brain.abdesign.json --env .env
+</code></pre>
+<p>Keep population names and widths aligned with the encoder and decoder. Let the
+build calculate the neuron allocation. The graph includes an abduction pair for
+a uniform motor interface; the adapter preserves its manually selected position.</p>
+<h2 id="runtime-behavior">Runtime behavior</h2>
+<p>Keep target-lead handling local to each motor and nonfatal. Preserve the thumb
+lock, neural extension, and grip-HOLD. Zero motor output must not create a new
+movement request. Read gaps remain missing observations, and stale actuation is
+not replayed after recovery. Stop saves dynamics; reset is a separate operation.
+Keep callbacks short and logging asynchronous.</p>
+<h2 id="check-changes">Check changes</h2>
+<pre><code class="language-bash">python -m pytest -q
+python run.py --check-offline
+python tools/check_project.py
+</code></pre>
+<p>Run <code>python run.py --check</code> with the installed runtime dependencies. For UI work,
+run the browser checks in <a href="testing.html">Testing</a>. Keep test fixtures distinct
+from physical measurements, and keep credentials and local run data in ignored
+files. Use the public SDK interfaces for application integration.</p>
+<h2 id="contributions-and-licensing">Contributions and licensing</h2>
+<p>Follow <a href="contributing.html">Contributing</a>. Keep the example's <a href="license.html">license</a> and
+<a href="third-party-notices.html">third-party notices</a> with redistributed code; SDKs and
+hardware remain separately licensed.</p>
+</main><footer><a href="index.html">Getting started</a> · <a href="license.html">License</a></footer></body></html>

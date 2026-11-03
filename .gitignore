@@ -1,0 +1,32 @@
+# Local credentials and operator settings
+.env
+.env.*
+!.env.example
+config.local.json
+thumb_setup.json
+tactile_baseline.json
+*.tmp
+# Generated or private run data
+logs/
+backups/
+test-results/
+*.abp
+*.key
+*.pem
+*.p12
+# Tooling
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.pio/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.egg-info/
+build/
+dist/

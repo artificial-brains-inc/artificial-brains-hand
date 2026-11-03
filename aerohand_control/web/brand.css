@@ -1,0 +1,36 @@
+/* Artificial Brains palette and existing logo from the Prima-Lux device UI. */
+:root{color-scheme:dark;--bg:#080b10;--panel:#10151d;--ink:#f0eef4;--text:#f0eef4;--muted:#a0a9ba;--line:#282c38;--green:#c3b6f4;--green-dark:#29243b;--green-light:#211e30;--blue:#85d4fc;--red:#ed959c;--lav:#c3b6f4;--lav-light:#ded3ff;--mint:#9fe6be;--warning:#f1ce90}
+body{background:radial-gradient(ellipse at 25% 0,#24203455,transparent 48%),#080b10;color:var(--text)}
+.app-shell{max-width:1440px}.topbar{height:132px;border-color:var(--line)}
+.brand{gap:22px;color:var(--text)}.ab-logo{display:block;width:164px;height:116px;object-fit:contain}
+.brand-caption{font-size:11px;font-weight:700;letter-spacing:2.4px;border-left:1px solid #3b4252;padding-left:22px;color:var(--lav)}.brand-caption span{display:block;margin-top:8px;font-size:9px;letter-spacing:1.8px;color:var(--muted)}
+.brand-mark{display:none}.connection,.device,.version{color:var(--muted)}.connection i,.device-dot,.status-dot.active{background:var(--mint)}.connection.offline{color:var(--red)}.preview-badge{background:#2e273c;border-color:#514867;color:var(--lav-light)}
+h1,h2,h3,h4{color:var(--text)}.eyebrow,.section-heading .eyebrow{color:var(--lav);letter-spacing:1.8px}.device-dot{box-shadow:0 0 12px #9fe6be55}
+.command-panel{background:linear-gradient(130deg,#28223c,#171c2a);border:1px solid #4c4268;box-shadow:0 16px 44px #0004}.command-panel .eyebrow{color:var(--lav-light)}.command-copy h2{color:#f7f5ff}.command-copy p{color:#beb8d3}.command-bottom{border-color:#574b6b;color:#b8c2d5}.phase{background:#c3b6f418;color:#ded3ff;border:1px solid #c3b6f43d}.hero-icon{background:#c3b6f40c;border-color:#c3b6f42b;color:#c3b6f4}.target-badge{background:#18332a;color:var(--mint)}
+.amount-control,.motor-panel,.tactile-panel{background:var(--panel);border-color:var(--line)}.amount-control label,.amount-heading output{color:var(--text)}.amount-control p,.amount-heading output span{color:var(--muted)}
+input[type=range]{accent-color:var(--lav);background:#303443}input[type=range]::-webkit-slider-thumb{background:var(--lav);border-color:#e0d7ff}input[type=range]::-webkit-slider-runnable-track{background:#343145}input[type=range]::-moz-range-thumb{background:var(--lav);border-color:#e0d7ff}
+.hold-button{background:#292437;border-color:#5a4b76;color:var(--lav-light)}.hold-button:hover:not(:disabled){background:#39304a;border-color:var(--lav)}.hold-button small{color:#b6acc8}.hold-button kbd{color:var(--lav-light);border-color:#655c77}
+.pose-heading>span,.keyboard-hint,.pose-button-meta,.pose-button kbd{color:#98a3b7}.pose-button{background:#10151d;border-color:#303544;color:var(--text)}.pose-button:hover:not(:disabled){background:#1c2030;border-color:#82719e}.pose-button.selected{background:#30263f;border-color:var(--lav);box-shadow:0 0 0 1px #c3b6f420}.pose-button .pose-icon{color:#afbad2}.pose-button.selected .pose-icon{color:var(--lav-light)}.pose-button.selected .pose-button-meta{color:#c0b6d4}kbd{border-color:#414657;color:#aeb8cb;background:#141924}
+.motor-legend,.feedback-note,.sensor-help,.sensor-zero,.panel-heading .eyebrow{color:var(--muted)}.actual-legend,.motor-fill{background:var(--lav)}.goal-legend,.motor-goal{background:var(--blue)}.motor-values .measured{color:var(--lav-light)}.motor-values .goal{color:var(--blue)}.motor-values .arrow{color:#6f7b90}.motor-row{border-color:#252a37}.motor-track{background:#2c3140}.motor-label{color:#d7dceb}.unit-badge{background:#1e2431;color:#bac6dd}
+.session-panel{background:#131823;border-color:#303544}.session-panel>p,.session-panel .stop-help{color:var(--muted)}.stop-button{border-color:#73505c;background:#2a1c27;color:#efb1b7}.stop-button:hover:not(:disabled){background:#482533;border-color:#d58998;color:#ffe2e5}
+.tactile-card{background:#151b26;border-color:#303747}.tactile-card h4{color:#c6cfe0}.adc-number{color:#f0eef4}.sensor-values{color:#b9c3d8}.neural-hold{color:#a7b4cb}.neural-hold.active{color:var(--warning)}
+.tactile-card progress{accent-color:var(--blue);height:5px;border:none;border-radius:6px;background:#30394a}.tactile-card progress::-webkit-progress-bar{background:#30394a;border-radius:6px}.tactile-card progress::-webkit-progress-value{background:var(--blue);border-radius:6px}.tactile-card progress::-moz-progress-bar{background:var(--blue);border-radius:6px}
+.action-button{background:#231f33;border-color:#574c70;color:var(--lav-light)}.action-button:hover:not(:disabled){background:#392e4d;border-color:#9d8ac6}.target-inputs label{color:#b8c3d5}.target-inputs input{background:#10141f;border-color:#434a5d;color:var(--text)}.target-inputs input:focus{outline:2px solid var(--lav);outline-offset:2px}
+.diagnostic-table th{color:#b5a5d6}.diagnostic-table th,.diagnostic-table td{border-color:#2c3342}.diagnostic-table td{color:#c4cee0}.log-path{background:#0b101a;border:1px solid #303747;color:#b8c9e4}.error-banner{background:#321f2a;border-color:#7d4d5d;color:#ffc0c9}.command-panel.is-error{background:#32202c}.command-panel.is-stopped{background:#151b26}
+.startup-note{background:#282137;border:1px solid #68577e;color:#e1d3ff;border-radius:12px;margin:0 0 20px;padding:15px 18px;font-size:11px;font-weight:650;letter-spacing:.5px;line-height:1.7}
+footer{color:#8e97aa;border-top:1px solid #262d3b}.preview-mode .feedback-note{color:#c7b58e}
+button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media(max-width:570px){.topbar{height:108px}.ab-logo{width:126px;height:89px}.brand{gap:0}.brand-caption{display:none}.topbar-right{gap:6px}.connection{font-size:9px}.section-heading{gap:8px}footer{display:block;font-size:8px}footer span{display:block;margin:5px 0}.tactile-card{padding:15px 12px}.sensor-help{font-size:12px}}
+
+/* Operator-selected thumb abduction. All assets remain local. */
+.thumb-panel {margin: 0 0 22px; border-color: #4b405f; background: #151320;}
+.thumb-controls {display:flex; gap:12px; align-items:end; flex-wrap:wrap; margin:18px 0 16px;}
+.thumb-controls .action-button {min-height:46px; padding:10px 18px; margin:0;}
+.thumb-number-label {display:flex; flex-direction:column; gap:6px; font-size:12px; color:#c8c0d8;}
+#thumb-angle {width:114px; padding:12px; border:1px solid #655675; background:#0e1119; color:#f6f0fc; border-radius:8px; font-size:18px; font-variant-numeric:tabular-nums;}
+.thumb-controls .thumb-primary {background:#c2b3e9; color:#151020; border-color:#c2b3e9;}
+.thumb-slider-label {display:flex; align-items:center; gap:18px; font-size:12px; color:#c8c0d8;}
+#thumb-slider {flex:1; min-width:80px; accent-color:#c2b3e9;}
+.thumb-readout {font-size:14px; color:#eee4ff; font-variant-numeric:tabular-nums; margin:12px 0 6px;}
+.thumb-panel button:disabled, .thumb-panel input:disabled {opacity:.45; cursor:not-allowed;}
+@media(max-width:600px){ .thumb-controls{gap:8px}.thumb-controls .action-button{padding:10px 12px}.thumb-number-label{flex:1}#thumb-angle{width:100%;box-sizing:border-box}.thumb-slider-label{gap:10px} }

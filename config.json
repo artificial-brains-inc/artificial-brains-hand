@@ -1,0 +1,40 @@
+{
+  "motor_directions": [
+    -1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "per_spike_degrees": [
+    0.35,
+    0.5,
+    0.75,
+    0.8,
+    0.8,
+    0.8,
+    0.8
+  ],
+  "input_hz": 20.0,
+  "telemetry_timeout_s": 0.15,
+  "startup_timeout_s": 5.0,
+  "output_timeout_s": 2.0,
+  "command_timeout_s": null,
+  "max_output_age_s": 0.5,
+  "status_interval_s": 1.0,
+  "max_target_lead_degrees": 8.0,
+  "tactile_max_age_s": 0.25,
+  "tactile_directions": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "feedback_reuse_s": 0.04,
+  "logging_max_mb": 256,
+  "startup_open_timeout_s": 30.0,
+  "startup_open_tolerance_degrees": 2.0
+}

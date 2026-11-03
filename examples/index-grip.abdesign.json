@@ -1,0 +1,394 @@
+{
+  "schema": "artificial-brains/design/v1",
+  "name": "Index finger tactile grip",
+  "nodes": [
+    {
+      "name": "goal_index_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 1920.0,
+      "neurons": 64
+    },
+    {
+      "name": "goal_index_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "position_index_tendon",
+      "kind": "input",
+      "x": 120.0,
+      "y": 2160.0,
+      "neurons": 64
+    },
+    {
+      "name": "position_index_tendon_canonical",
+      "kind": "opu",
+      "x": 1320.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_compare_flex",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_flex_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_flex_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 1920.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "index_tendon_flex_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 1920.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "index_tendon_flex_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2030.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_flex",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 1920.0,
+      "neurons": 1
+    },
+    {
+      "name": "index_tendon_compare_extend",
+      "kind": "opu",
+      "x": 1640.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.0
+    },
+    {
+      "name": "index_tendon_extend_theta3",
+      "kind": "opu",
+      "x": 1960.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_extend_theta2",
+      "kind": "opu",
+      "x": 2260.0,
+      "y": 2160.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "index_tendon_extend_beta5",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2160.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "index_tendon_extend_reset",
+      "kind": "opu",
+      "x": 2560.0,
+      "y": 2270.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "index_tendon_extend",
+      "kind": "output",
+      "x": 2860.0,
+      "y": 2160.0,
+      "neurons": 1
+    },
+    {
+      "name": "touch_index",
+      "kind": "input",
+      "x": 120.0,
+      "y": 5100.0,
+      "neurons": 64
+    },
+    {
+      "name": "touch_index_theta3",
+      "kind": "opu",
+      "x": 420.0,
+      "y": 5100.0,
+      "rhythm": "theta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "touch_index_theta2",
+      "kind": "opu",
+      "x": 740.0,
+      "y": 5100.0,
+      "rhythm": "theta",
+      "tnorm": 2.01
+    },
+    {
+      "name": "grip_index_opposition",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5100.0,
+      "rhythm": "beta",
+      "tnorm": 5.0
+    },
+    {
+      "name": "grip_index_reset",
+      "kind": "opu",
+      "x": 1060.0,
+      "y": 5260.0,
+      "rhythm": "beta",
+      "tnorm": 3.0
+    },
+    {
+      "name": "grip_index_hold",
+      "kind": "output",
+      "x": 1380.0,
+      "y": 5100.0,
+      "neurons": 1
+    },
+    {
+      "name": "grip_index_hold_relay",
+      "kind": "opu",
+      "x": 1700.0,
+      "y": 5100.0,
+      "rhythm": "high-gamma",
+      "tnorm": 10.0
+    }
+  ],
+  "connections": [
+    {
+      "from": "goal_index_tendon",
+      "to": "goal_index_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "position_index_tendon",
+      "to": "position_index_tendon_canonical",
+      "type": "exc"
+    },
+    {
+      "from": "goal_index_tendon_canonical",
+      "to": "index_tendon_compare_flex",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "position_index_tendon_canonical",
+      "to": "index_tendon_compare_flex",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "index_tendon_compare_flex",
+      "to": "index_tendon_flex_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_theta3",
+      "to": "index_tendon_flex_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_theta2",
+      "to": "index_tendon_flex_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_flex",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_flex_reset",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_flex_reset",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_reset",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "position_index_tendon_canonical",
+      "to": "index_tendon_compare_extend",
+      "type": "exc",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "goal_index_tendon_canonical",
+      "to": "index_tendon_compare_extend",
+      "type": "inh",
+      "role": "operand",
+      "units": 1.0
+    },
+    {
+      "from": "index_tendon_compare_extend",
+      "to": "index_tendon_extend_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_theta3",
+      "to": "index_tendon_extend_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_theta2",
+      "to": "index_tendon_extend_beta5",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_extend",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_extend_reset",
+      "type": "exc"
+    },
+    {
+      "from": "index_tendon_extend_reset",
+      "to": "index_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_reset",
+      "to": "index_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_extend_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_flex_beta5",
+      "to": "index_tendon_extend",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "index_tendon_extend_beta5",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "touch_index",
+      "to": "touch_index_theta3",
+      "type": "exc"
+    },
+    {
+      "from": "touch_index_theta3",
+      "to": "touch_index_theta2",
+      "type": "exc"
+    },
+    {
+      "from": "touch_index_theta2",
+      "to": "grip_index_opposition",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "grip_index_hold",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "grip_index_reset",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_reset",
+      "to": "touch_index_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_reset",
+      "to": "grip_index_hold",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold",
+      "to": "grip_index_hold_relay",
+      "type": "exc"
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_opposition",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold_relay",
+      "to": "index_tendon_flex_theta2",
+      "type": "inh",
+      "role": "feedback",
+      "strength": 1.0
+    },
+    {
+      "from": "grip_index_hold_relay",
+      "to": "index_tendon_flex",
+      "type": "inh",
+      "strength": 1.0
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+Artificial Brains Example Code License 1.0
+SPDX-License-Identifier: LicenseRef-Artificial-Brains-Products-Only-1.0
+
+Copyright (c) 2026 Artificial Brains and the identified contributors.
+
+This is a source-available, product-restricted license. It is not an OSI-approved
+open-source license. By exercising rights granted by this License, you accept
+its terms.
+
+1. SCOPE AND DEFINITIONS
+
+"Covered Material" means the original example application code, public neural
+circuit designs, sensor-acquisition sketch, tests, documentation, and example
+configuration distributed in this repository under this License, and the
+copyrightable portions of modifications and derivative works based on them.
+Separately identified third-party material and Brand Assets are excluded as
+specified below. Independently created work that does not contain or derive
+from Covered Material is not brought under this License merely because it
+interoperates with Covered Material.
+
+"Licensor" means Artificial Brains and, for a contribution, the copyright
+holder that submits it under this License.
+
+"Authorized Artificial Brains Products" means genuine neural-computation
+hardware, devices, hosted services, or expressly authorized runtime products
+provided or authorized by Artificial Brains, including Prima-Lux, used under
+their applicable terms. A compatible name, interface, or emulation alone does
+not make a third-party neural runtime an authorized product.
+
+"Permitted Purpose" means developing, studying, demonstrating, testing,
+modifying, deploying, supporting, or operating applications and neural designs
+for use with Authorized Artificial Brains Products. It includes source review,
+education, UI previews, development on general-purpose computers, software
+unit tests using synthetic I/O, and peripheral sensor/actuator integration,
+when undertaken for that purpose. A product need not be physically connected
+while you edit, review, test, clone, or redistribute the Covered Material.
+
+2. COPYRIGHT PERMISSION
+
+Subject to this License, each Licensor grants you a worldwide, non-exclusive,
+royalty-free copyright license to access, download, clone, copy, use, execute,
+display, modify, prepare derivative works of, and distribute Covered Material
+in source or object form, with or without modification, solely for the
+Permitted Purpose. Personal, educational, research, and commercial use within
+that purpose is permitted. You may charge for permitted copies, integrations,
+products, and support, without implying that a Licensor provides your warranty
+or endorses your work.
+
+3. PRODUCT RESTRICTION
+
+You may not use Covered Material, or a modification or derivative containing
+it, to deploy or operate its neural computation on an unauthorized substitute
+for an Artificial Brains neural-computation product. Porting it to or providing
+it as an example for an unrelated or competing neural runtime is outside the
+grant. Connecting a third-party robotic hand, host computer, sensor board, or
+other peripheral to an Authorized Artificial Brains Product is permitted and
+does not license that peripheral's designs or technology.
+
+4. REDISTRIBUTION AND MODIFICATION
+
+When distributing Covered Material or its derivatives:
+(a) include this License, applicable copyright notices, and relevant third-party
+    notices; make these available with object-form distributions as well;
+(b) identify your substantive modifications, and do not misrepresent authorship,
+    official status, certification, or endorsement;
+(c) retain the product restriction for the Covered Material and its derivative
+    portions. Recipients receive their permission for those portions directly
+    under this License. You may not relicense those portions under terms that
+    remove the restriction or purport to grant rights you do not hold;
+(d) do not impose terms that contradict separately licensed third-party rights.
+
+You may keep your modifications private. This License does not require you to
+publish source or grant rights to independent code merely aggregated with the
+example. You retain rights you otherwise own in your original contributions,
+subject to the underlying rights in any Covered Material they incorporate.
+
+5. SDK, HARDWARE, FIRMWARE, AND OTHER EXCLUDED TECHNOLOGY
+
+This License applies to this example, NOT to the Artificial Brains SDK, any
+vendor's SDK, the neural engine, compiler or build service implementation,
+Device Manager, embedded runtime, product firmware, bitstreams, RTL, silicon,
+hardware designs, hardware manufacturing rights, or proprietary technology
+that is not expressly included as Covered Material.
+
+No permission to copy, publish, redistribute, sublicense, manufacture, reverse
+engineer, or modify those excluded items is granted here. Obtain any required
+rights under their separate terms. A dependency declaration, import, interface
+call, public design file, or link is not a grant of rights in a dependency.
+This License does not override rights independently available under another
+license or under non-waivable law. Any proprietary components embedded in a
+compiled artifact remain subject to their own terms.
+
+The sensor-acquisition example under sensor_firmware/ is Covered Material;
+this does not license the STM32 hardware, Arduino framework, vendor bootloader,
+or the robotic hand's firmware. Hardware and SDK ownership is neither assigned
+nor transferred by this License.
+
+6. THIRD-PARTY MATERIAL
+
+Material identified in THIRD_PARTY_NOTICES.md or in an individual file as
+separately licensed remains exclusively subject to its applicable third-party
+terms for those portions. Nothing in this License adds a product-use restriction
+to an independently licensed third-party component, restricts its original
+license grant, or claims its ownership. Preserve its notices when redistributing.
+Any patent rights in third-party material arise only under its own terms.
+
+7. BRAND ASSETS AND OTHER RESERVED RIGHTS
+
+Names, logos, and other Brand Assets are not generally licensed as Covered
+Material. The limited permission to reproduce the included Artificial Brains
+logo as attribution within this example is specified in BRANDING.md. No general
+trademark, service-mark, patent, trade-secret, hardware, or SDK license is
+granted or implied by this License. All rights not expressly granted are
+reserved by their respective holders.
+
+8. CONTRIBUTIONS
+
+Unless a separate written agreement says otherwise, an intentional submission
+of your original contribution for inclusion in this project is offered under
+this License. You must have authority to grant those rights, identify any
+third-party material, and preserve its terms. This is not an assignment of
+ownership, nor a right for anyone to relicense excluded third-party material.
+
+9. TERMINATION
+
+Your rights terminate automatically upon material violation of this License.
+For a first violation, rights are reinstated if you stop the violation and cure
+it within 30 days after learning of it, unless the Licensor has notified you of
+another applicable written arrangement. A termination does not terminate the
+rights of compliant downstream recipients. Sections concerning scope,
+restrictions, excluded rights, notices, disclaimers, and liability survive.
+
+10. NO WARRANTY; RESPONSIBILITY FOR PHYSICAL SYSTEMS
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, COVERED MATERIAL IS PROVIDED
+"AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+IT IS AN EXPERIMENTAL EXAMPLE, NOT A CERTIFIED SAFETY OR FORCE-LIMITING SYSTEM.
+YOU ARE RESPONSIBLE FOR HARDWARE SELECTION, SAFE OPERATION, VALIDATION, RISK
+ASSESSMENT, COMPLIANCE, AND YOUR MODIFICATIONS AND DISTRIBUTIONS.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, NO LICENSOR OR CONTRIBUTOR IS
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR IN CONNECTION
+WITH COVERED MATERIAL OR ITS USE, WHETHER IN CONTRACT, TORT, OR OTHERWISE.
+NOTHING EXCLUDES LIABILITY THAT CANNOT LAWFULLY BE EXCLUDED.
+
+11. INTERPRETATION
+
+If a provision is unenforceable, the remaining provisions remain effective to
+the extent permitted by law. No future publication or modification of another
+license changes this grant for a copy already distributed under it. A separate
+signed agreement may grant additional rights. For excluded technology, its
+own applicable terms control. This License does not restrict non-waivable
+statutory rights.
