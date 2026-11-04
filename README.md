@@ -16,7 +16,7 @@ The project includes the brain design, a browser control panel, five-channel sen
 
 | Component | Setup |
 | --- | --- |
-| **Prima-Lux dev kit** | A registered 10,000-neuron device, its developer API key, and device software supporting the SDK 0.4.0 live output stream. |
+| **Prima-Lux dev kit** | A registered 10,000-neuron device, its developer API key, and device software supporting the SDK 0.4.0 live output stream. **GET YOURS:** [Prima-Lux Dev Kit with up to 10,000 synthetic neurons](https://artificialbrains.ai) |
 | **Aero Hand Open** | A powered, configured hand with vendor firmware and homing completed. Follow the [hand setup guide](https://docs.tetheria.ai/docs/sdk/). |
 | **Five touch sensors** | One pad per finger, connected to a USB acquisition board. The included firmware supports a Blue Pill STM32F103C8 using PA0–PA4. See [sensor setup](docs/sensors.md) for wiring requirements and the data format. |
 | **Computer** | Linux/Ubuntu, Python 3.10 or newer, Git, Python venv support, and a browser. |
